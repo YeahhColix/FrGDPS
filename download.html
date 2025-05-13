@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FreedomGDPS - Download Songs">
+  <title>FreedomGDPS - Download</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" href="assets/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Download Songs</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="download.html">Download</a></li>
+        <li><a href="rate.html">Rate Level</a></li>
+        <li><a href="leader.html">Leaderboard</a></li>
+        <li><a href="sdk.html">SDK</a></li>
+        <li><a href="pap.html">PAP</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="download-list">
+      <h2>Available Songs</h2>
+      <div id="songs"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 FreedomGDPS</p>
+  </footer>
+  <script>
+    fetch('https://fless.ps.fhgdps.com/dashboard/api/addSong.php')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('songs');
+        data.songs.forEach(song => {
+          const a = document.createElement('a');
+          a.href = song.url;
+          a.textContent = song.name;
+          container.appendChild(a);
+          container.appendChild(document.createElement('br'));
+        });
+      })
+      .catch(console.error);
+  </script>
+</body>
+</html>
