@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FreedomGDPS - Rate Levels">
+  <title>FreedomGDPS - Rate Level</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" href="assets/favicon.png">
+</head>
+<body>
+  <header>
+    <h1>Rate Levels</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="download.html">Download</a></li>
+        <li><a href="rate.html">Rate Level</a></li>
+        <li><a href="leader.html">Leaderboard</a></li>
+        <li><a href="sdk.html">SDK</a></li>
+        <li><a href="pap.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="rating-form">
+      <h2>Submit Your Rating</h2>
+      <form id="form">
+        <input type="text" id="lvl" placeholder="Level ID" required>
+        <input type="number" id="rate" min="1" max="5" placeholder="1-5" required>
+        <button type="submit">Submit</button>
+      </form>
+      <p id="response"></p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 FreedomGDPS</p>
+  </footer>
+  <script>
+    document.getElementById('form').addEventListener('submit', e => {
+      e.preventDefault();
+      const lvl = document.getElementById('lvl').value;
+      const rate = document.getElementById('rate').value;
+      fetch(`https://fless.ps.fhgdps.com/dashboard/api/addSong.php?level=${lvl}&rating=${rate}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('response').textContent = data.message;
+        })
+        .catch(console.error);
+    });
+  </script>
+</body>
+</html>
