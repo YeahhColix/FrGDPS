@@ -1,140 +1,126 @@
-/* Reset dasar */
+/* RESET & DASAR */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
+  font-family: "Segoe UI", sans-serif;
+  background: #fafafa;
+  color: #222;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* HEADER & NAVIGATION */
 header {
-  background-color: #1c1c1c;
-  color: white;
-  padding: 1.5rem 1rem;
+  background: #111;
+  color: #fff;
+  padding: 1rem;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
 header h1 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
 }
-
 nav {
   margin-top: 0.5rem;
 }
-
 nav a {
   color: #66ccff;
-  margin: 0 10px;
+  margin: 0 8px;
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
 }
-
 nav a:hover {
-  color: #ffffff;
+  color: white;
 }
 
+/* MAIN */
 main {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   max-width: 800px;
   margin: auto;
 }
 
+/* FORM */
 form {
-  background: white;
-  padding: 1.5rem;
+  background: #fff;
+  padding: 1.2rem;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
 }
-
 form label {
   font-weight: bold;
   display: block;
-  margin: 10px 0 4px;
+  margin-top: 10px;
 }
-
-form input[type="text"],
-form input[type="url"] {
+form input {
   width: 100%;
-  padding: 10px;
+  padding: 8px;
+  margin-top: 4px;
   margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 button {
   background: #1c64c5;
   color: white;
-  padding: 10px 18px;
   border: none;
+  padding: 10px 18px;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
 }
-
 button:hover {
   background: #144da1;
 }
 
+/* LIST */
 ul#demon-list {
   list-style: none;
   padding: 0;
 }
-
 ul#demon-list li {
   background: white;
-  margin-bottom: 1rem;
   padding: 1rem;
+  margin-bottom: 0.75rem;
   border-left: 4px solid #1c64c5;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-
+ul#demon-list li strong {
+  font-size: 1.1rem;
+}
 ul#demon-list li a {
   color: #1c64c5;
   text-decoration: none;
 }
-
 ul#demon-list li a:hover {
   text-decoration: underline;
 }
 
+/* FOOTER */
 footer {
+  background: #111;
+  color: #fff;
   text-align: center;
   padding: 1rem;
-  background: #1c1c1c;
-  color: white;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin-top: auto;
 }
 
+/* MOBILE */
 @media (max-width: 768px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
-
   nav a {
     display: inline-block;
-    margin: 5px;
+    margin: 6px;
   }
-
   main {
-    padding: 1rem;
-  }
-
-  form {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 }
