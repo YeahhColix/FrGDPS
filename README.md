@@ -1,11 +1,92 @@
-| File               | Deskripsi                                  |
-| ------------------ | ------------------------------------------ |
-| `index.html`       | Halaman Beranda                            |
-| `dashboard.html`   | Halaman Dashboard (Stats)                  |
-| `download.html`    | Halaman Daftar & Unduh Lagu                |
-| `rate.html`        | Halaman Form Rating Level                  |
-| `leader.html`      | Halaman Leaderboard Top Rated              |
-| `sdk.html`         | Halaman Dokumentasi API/SDK                |
-| `pap.html`         | Halaman Detail PAP                         |
-| `styles/main.css`  | Stylesheet Global untuk Konsistensi Layout |
-| `assets/favicon.png` | Favicon (ikon tab browser)              |
+<h1 align="center">FrGDPS!!11</h1>
+<p align="center">
+  <i>A Geometry Dash Private Server that's broken, buggy, and barely alive but made with muwani.</i>
+</p>
+
+---
+
+## 💔 About FreedomGDPS!!11
+
+FreedomGDPS!!11 is not the most advanced server.  
+It's not the most active.  
+And sometimes... it's not even the most stable.  
+
+We know it's far from perfect. Many features are unfinished. Errors happen for no reason.  
+But this project is built on the desire to **learn**, **share**, and **create**, even with all our limits.
+
+---
+
+## ⚠️ Known Flaws & Limitations
+
+- The UI is messy honestly, kind of ugly.  
+- Random crashes? Yeah, they're real.  
+- No proper level moderation system.  
+- Level ratings? Expect chaos.  
+- Tools are experimental and unstable.  
+- No real security.  
+- Database works... when it wants to.  
+- Free hosting means... frequent downtime.  
+- Not everyone will like it and that’s okay.
+
+---
+
+## 🙃 Still, We Keep Going
+
+Though small, though broken,  
+FreedomGDPS keeps moving because some of us still believe in freedom and creativity.
+
+If you ever felt left out in other servers,  
+Maybe you’ll find a little home here.
+
+---
+
+## 🧩 Links & Access
+
+- **Download APK**: [Click Here](https://fless.rf.gd/download.php)  
+- **FGD Tools**: [Explore](https://fless.rf.gd)   
+- **Database**: [Sometimes Works](https://fless.ps.fhgdps.com)
+- **GDPSHub**: [Rate Us Here](https://gdpshub.com/gdps/2924)
+
+---
+
+## 🙏 Who Runs This?
+
+- **Owner**: Fless  
+- **Co-Owner**: Zeroxy  
+- *We're just trying to keep this project alive.*
+
+---
+
+## 📜 Community Rules (We Try to Follow Them)
+
+- Create levels longer than 20 seconds.  
+- Don't mess up level difficulties.  
+- If you remake someone’s level, give credit.  
+- Moderators must not delete levels without permission.
+
+---
+
+## 📱 Community Channels
+  
+- [WhatsApp Group Chat](https://chat.whatsapp.com/Fmh5DoSjbWkBje0ab3RAEF) *(Since 10/09/21)* 
+- [WhatsApp Channel](https://whatsapp.com/channel/0029Vb2YIzQHQbS0V7EXf434) *(Since 10/01/25)*
+- [Discord Server](https://discord.gg/YyeZ2Sxjgf) *(Since 28/11/24)*
+- [Sub Reddit](https://www.reddit.com/r/FrGDPS) *(Since 14/5/25)*
+
+---
+
+## ☕ Support Us
+
+We don’t ask for much. But if you want to help:
+
+- [Saweria (every donation counts)](https://saweria.co/thiosaputra) 
+- [SociaBuzz (every donation counts)](https://sociabuzz.com/ameliapt)  
+- [Newgrounds Profile](https://rotenfles777.newgrounds.com/)
+
+---
+
+## 🫂 Final Words
+
+> *We may not be the best server. But maybe... we’re enough.*  
+>  
+> *If you’re still here after reading this, thank you.*
