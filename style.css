@@ -1,12 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  background: #f0f0f0;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background: #1c1c1c;
+  background-color: #1c1c1c;
   color: white;
   padding: 20px;
   text-align: center;
@@ -14,8 +14,9 @@ header {
 
 nav a {
   color: white;
-  margin: 0 15px;
+  margin: 0 10px;
   text-decoration: none;
+  font-weight: bold;
 }
 
 main {
@@ -23,8 +24,45 @@ main {
 }
 
 footer {
-  text-align: center;
-  padding: 15px;
-  background: #1c1c1c;
+  background-color: #1c1c1c;
   color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+form input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #2d89ef;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1c64c5;
+}
+
+ul#demon-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul#demon-list li {
+  background: white;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
