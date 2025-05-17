@@ -1,57 +1,91 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
+/* Reset dasar */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
   background-color: #1c1c1c;
   color: white;
-  padding: 20px;
+  padding: 1.5rem 1rem;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+nav {
+  margin-top: 0.5rem;
 }
 
 nav a {
-  color: white;
+  color: #66ccff;
   margin: 0 10px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: #ffffff;
 }
 
 main {
-  padding: 20px;
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: auto;
 }
 
-footer {
-  background-color: #1c1c1c;
-  color: white;
-  text-align: center;
+form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+form label {
+  font-weight: bold;
+  display: block;
+  margin: 10px 0 4px;
+}
+
+form input[type="text"],
+form input[type="url"] {
+  width: 100%;
   padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-form input {
-  width: 100%;
-  max-width: 400px;
-  padding: 8px;
-  margin-bottom: 10px;
-  font-size: 1rem;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #2d89ef;
+  background: #1c64c5;
   color: white;
+  padding: 10px 18px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 button:hover {
-  background-color: #1c64c5;
+  background: #144da1;
 }
 
 ul#demon-list {
@@ -61,8 +95,46 @@ ul#demon-list {
 
 ul#demon-list li {
   background: white;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-left: 4px solid #1c64c5;
+  border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+ul#demon-list li a {
+  color: #1c64c5;
+  text-decoration: none;
+}
+
+ul#demon-list li a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1c1c1c;
+  color: white;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 5px;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  form {
+    padding: 1rem;
+  }
 }
