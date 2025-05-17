@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Level</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Submit Level</h1>
+    <nav>
+      <a href="index.html">Daftar</a>
+      <a href="submit.html">Submit</a>
+    </nav>
+  </header>
+  <main>
+    <form id="submit-form">
+      <label>Nama Level:</label><br>
+      <input type="text" name="name" required><br><br>
+
+      <label>Pembuat:</label><br>
+      <input type="text" name="creator" required><br><br>
+
+      <label>Verifikator:</label><br>
+      <input type="text" name="verifier" required><br><br>
+
+      <label>Link Video:</label><br>
+      <input type="url" name="video" required><br><br>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </main>
+  <footer>
+    <p>© 2025 FreedomGDPS!!11</p>
+  </footer>
+
+  <script>
+    document.getElementById('submit-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Data berhasil dikirim (dummy). Nanti bisa disimpan ke Google Sheet atau API.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
