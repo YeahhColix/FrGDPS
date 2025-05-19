@@ -10,12 +10,12 @@
       src: url('https://fless.rf.gd/gauntlet/assets/Pusab.tff') format('truetype');
     }
 
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Pusab', sans-serif;
+      background-color: #0f0f0f;
       color: #f5f5f5;
-      background: #0f0f0f;
       overflow-x: hidden;
     }
 
@@ -23,17 +23,18 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 200%;
-      height: 200%;
+      width: 300%;
+      height: 300%;
       background: url('https://fless.rf.gd/gauntlet/assets/img/bg-pattern.png') repeat;
       background-size: 150px 150px;
-      animation: moveBackground 20s linear infinite;
+      animation: scrollBG 60s linear infinite;
       z-index: -1;
+      opacity: 0.06;
     }
 
-    @keyframes moveBackground {
+    @keyframes scrollBG {
       0% { transform: translate(0, 0); }
-      100% { transform: translate(-50%, -50%); }
+      100% { transform: translate(-150px, -150px); }
     }
 
     header {
@@ -45,6 +46,7 @@
       color: #4fc3f7;
       font-size: 48px;
       margin-bottom: 10px;
+      text-shadow: 0 0 8px #4fc3f766;
     }
 
     nav {
@@ -74,12 +76,13 @@
       max-width: 800px;
       margin: 20px auto;
       text-align: justify;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.75);
       padding: 20px;
       border-radius: 10px;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      box-shadow: 0 0 10px #4fc3f755;
     }
 
     section.active {
@@ -88,11 +91,9 @@
       transform: translateY(0);
     }
 
-    footer {
-      text-align: center;
-      margin: 40px 0 20px;
-      font-size: 14px;
-      color: #bbb;
+    h2 {
+      color: #ffffff;
+      margin-bottom: 10px;
     }
 
     ul {
@@ -103,7 +104,7 @@
       margin-bottom: 8px;
     }
 
-    .discord-widget, .apkpure-widget {
+    .apkpure-widget, .discord-widget {
       display: flex;
       justify-content: center;
       margin: 40px auto;
@@ -119,6 +120,13 @@
         width: 90%;
         height: 400px;
       }
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 14px;
+      color: #bbb;
     }
   </style>
 </head>
