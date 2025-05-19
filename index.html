@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FreedomGDPS</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      color: #4fc3f7;
+      font-size: 36px;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav button {
+      background: #4fc3f7;
+      border: none;
+      color: #0f0f0f;
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    section {
+      display: none;
+      max-width: 800px;
+      margin: auto;
+      text-align: justify;
+    }
+    section.active {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FreedomGDPS</h1>
+    <p>Custom Geometry Dash Private Server</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('id')">Bahasa Indonesia</button>
+    <button onclick="showSection('en')">English</button>
+  </nav>
+
+  <section id="id" class="active">
+    <h2>Apa itu FrGDPS?</h2>
+    <p>
+      FreedomGDPS!!11 adalah Geometry Dash Private Server yang dirancang untuk memberikan kebebasan penuh kepada para pemain dan kreator level. Di sini, setiap level yang kamu buat akan mendapatkan rating, sehingga sangat cocok bagi kamu yang ingin mengumpulkan bintang (stargrind) atau sekadar mengekspresikan kreativitas tanpa batasan.
+    </p>
+    <h3>Fitur Utama:</h3>
+    <ul>
+      <li>🌟 Semua level mendapatkan rating otomatis</li>
+      <li>🎨 Standar fitur yang rendah untuk mendorong kreativitas</li>
+      <li>🚀 Cocok untuk pemain kasual maupun pemburu bintang</li>
+      <li>📱 Kompatibel dengan berbagai perangkat</li>
+    </ul>
+    <p>
+      Bergabunglah dengan komunitas kami dan nikmati pengalaman bermain Geometry Dash yang lebih bebas dan menyenangkan!
+    </p>
+  </section>
+
+  <section id="en">
+    <h2>What is FreedomGDPS?</h2>
+    <p>
+      FreedomGDPS!!11 is a Geometry Dash Private Server designed to provide complete freedom to players and level creators. Here, every level you create receives an automatic rating, making it ideal for stargrinders and those who wish to express their creativity without limitations.
+    </p>
+    <h3>Main Features:</h3>
+    <ul>
+      <li>🌟 All levels receive automatic ratings</li>
+      <li>🎨 Low feature standards to encourage creativity</li>
+      <li>🚀 Suitable for casual players and stargrinders alike</li>
+      <li>📱 Compatible with various devices</li>
+    </ul>
+    <p>
+      Join our community and enjoy a more free and enjoyable Geometry Dash experience!
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 FreedomGDPS!!11. All rights reserved.
+  </footer>
+
+  <script>
+    function showSection(lang) {
+      document.getElementById('id').classList.remove('active');
+      document.getElementById('en').classList.remove('active');
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
