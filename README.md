@@ -53,8 +53,8 @@
 
 ### Essential Links
 🔗 [Latest APK Download](https://fless.rf.gd/download.php)  
-🔧 [FGD Tools Portal](https://fless.rf.gd)  
-🗃️ [Database Dashboard](https://fless.ps.fhgdps.com) (Status: Unstable)  
+🔧 [FGD Portal](https://fless.rf.gd)  
+🗃️ [Database Dashboard](https://fless.ps.fhgdps.com)  
 ⭐ [GDPSHub Profile](https://gdpshub.com/gdps/2924)
 
 ---
@@ -107,7 +107,7 @@
 ## 💬 Final Thoughts
 
 > *"We're building a digital campfire - not a perfect one, but warm enough for those who want to gather around."*  
-> – FreedomGDPS Team
+> – FrGDPS Owner
 
 **Thank you for embracing our imperfect journey.**  
 🧡 Your presence gives this project meaning. 🧡
