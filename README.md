@@ -1,92 +1,115 @@
-<h1 align="center">FrGDPS!!11</h1>
+<h1 align="center">
+  <img src="https://fless.ps.fhgdps.com/dashboard/icon.png" width="40"/>
+  FrGDPS!!11
+</h1>
+
 <p align="center">
-  <i>A Geometry Dash Private Server that's broken, buggy, and barely alive but made with muwani.</i>
+  <em>A passion-driven GDPS with quirks and charm - where imperfect creation meets genuine community</em>
 </p>
 
----
-
-## 💔 About FreedomGDPS!!11
-
-FreedomGDPS!!11 is not the most advanced server.  
-It's not the most active.  
-And sometimes... it's not even the most stable.  
-
-We know it's far from perfect. Many features are unfinished. Errors happen for no reason.  
-But this project is built on the desire to **learn**, **share**, and **create**, even with all our limits.
-
----
-
-## ⚠️ Known Flaws & Limitations
-
-- The UI is messy honestly, kind of ugly.  
-- Random crashes? Yeah, they're real.  
-- No proper level moderation system.  
-- Level ratings? Expect chaos.  
-- Tools are experimental and unstable.  
-- No real security.  
-- Database works... when it wants to.  
-- Free hosting means... frequent downtime.  
-- Not everyone will like it and that’s okay.
-
----
-
-## 🙃 Still, We Keep Going
-
-Though small, though broken,  
-FreedomGDPS keeps moving because some of us still believe in freedom and creativity.
-
-If you ever felt left out in other servers,  
-Maybe you’ll find a little home here.
-
----
-
-## 🧩 Links & Access
-
-- **Download APK**: [Click Here](https://fless.rf.gd/download.php)  
-- **FGD Tools**: [Explore](https://fless.rf.gd)   
-- **Database**: [Sometimes Works](https://fless.ps.fhgdps.com)
-- **GDPSHub**: [Rate Us Here](https://gdpshub.com/gdps/2924)
-
----
-
-## 🙏 Who Runs This?
-
-- **Owner**: Fless  
-- **Co-Owner**: Zeroxy  
-- *We're just trying to keep this project alive.*
-
----
-
-## 📜 Community Rules (We Try to Follow Them)
-
-- Create levels longer than 20 seconds.  
-- Don't mess up level difficulties.  
-- If you remake someone’s level, give credit.  
-- Moderators must not delete levels without permission.
-
----
-
-## 📱 Community Channels
+<div align="center">
   
-- [WhatsApp Group Chat](https://chat.whatsapp.com/Fmh5DoSjbWkBje0ab3RAEF) *(Since 10/09/21)* 
-- [WhatsApp Channel](https://whatsapp.com/channel/0029Vb2YIzQHQbS0V7EXf434) *(Since 10/01/25)*
-- [Discord Server](https://discord.gg/YyeZ2Sxjgf) *(Since 28/11/24)*
-- [Sub Reddit](https://www.reddit.com/r/FrGDPS) *(Since 14/5/25)*
+  [![GDPS Version](https://img.shields.io/badge/version-2.1.3-orange)](https://fless.rf.gd/download.php)
+  [![Server Status](https://img.shields.io/badge/status-🟢_Alive-green)](https://fless.ps.fhgdps.com)
+  [![Community Age](https://img.shields.io/badge/active_since-2024-blue)]()
+
+</div>
 
 ---
 
-## ☕ Support Us
+## 🌱 Why FreedomGDPS?
 
-We don’t ask for much. But if you want to help:
+**Not the biggest. Not the fanciest.** But built with:
 
-- [Saweria (every donation counts)](https://saweria.co/thiosaputra) 
-- [SociaBuzz (every donation counts)](https://sociabuzz.com/ameliapt)  
-- [Newgrounds Profile](https://rotenfles777.newgrounds.com/)
+- 💔 **Raw passion** over polished perfection
+- 🧠 **Learning-first** philosophy
+- 🌈 **Creative freedom** above strict rules
+- 🤝 **Community-driven** development
+
+> *"Our bugs have character, our crashes have personality, and our community has heart."*
 
 ---
 
-## 🫂 Final Words
+## 🛠 Current State & Challenges
 
-> *We may not be the best server. But maybe... we’re enough.*  
->  
-> *If you’re still here after reading this, thank you.*
+### Core Features
+```diff
++ Basic server functionality
++ Custom level sharing
++ Experimental tools suite
+! Partial database support
+- Advanced moderation system
+```
+
+### Active Development Areas
+- **Stability Improvements** (reduce random crashes)
+- **UI Overhaul Project** (WIP)
+- **Security Framework** (basic protections)
+- **Database Optimization** (better uptime)
+
+---
+
+## 🚀 Quick Access
+
+### Essential Links
+🔗 [Latest APK Download](https://fless.rf.gd/download.php)  
+🔧 [FGD Tools Portal](https://fless.rf.gd)  
+🗃️ [Database Dashboard](https://fless.ps.fhgdps.com) (Status: Unstable)  
+⭐ [GDPSHub Profile](https://gdpshub.com/gdps/2924)
+
+---
+
+## 👥 Community Corner
+
+### Connect With Us
+[![WhatsApp](https://img.shields.io/badge/WhatsApp_Group-25D366?logo=whatsapp)](https://chat.whatsapp.com/Fmh5DoSjbWkBje0ab3RAEF)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?logo=discord)](https://discord.gg/YyeZ2Sxjgf)
+[![Reddit](https://img.shields.io/badge/Subreddit-FF4500?logo=reddit)](https://www.reddit.com/r/FrGDPS)
+
+---
+
+## 📜 Community Guidelines
+
+1. **Respect Creativity**  
+   - Original content only (proper credit required for remakes)
+   - Minimum 20-second levels
+
+2. **Preserve Balance**  
+   - No difficulty manipulation
+   - Collaborative moderation
+
+3. **Embrace Imperfection**  
+   - Expect occasional instability
+   - Report issues constructively
+
+---
+
+## 💌 Support the Journey
+
+**Help keep our dream alive:**  
+[![Saweria](https://img.shields.io/badge/Support-Saweria-FFD700)](https://saweria.co/thiosaputra)  
+[![SociaBuzz](https://img.shields.io/badge/Back-SociaBuzz-FF69B4)](https://sociabuzz.com/ameliapt)
+
+**Creative Support:**  
+🎨 [Newgrounds Portfolio](https://rotenfles777.newgrounds.com/)
+
+---
+
+## 🌟 Project Stewards
+
+| Role       | Member     | Contribution Focus |
+|------------|------------|--------------------|
+| Founder    | Fless      | Core Architecture  |
+| Co-Lead    | Zeroxy     | Community Management|
+
+---
+
+## 💬 Final Thoughts
+
+> *"We're building a digital campfire - not a perfect one, but warm enough for those who want to gather around."*  
+> – FreedomGDPS Team
+
+**Thank you for embracing our imperfect journey.**  
+🧡 Your presence gives this project meaning. 🧡
+
+![Divider](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
