@@ -1,0 +1,30 @@
+name: Discord Notification
+on: [push, pull_request]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha
+            });
+            const payload = {
+              content: `🎉 **New Commit** di ${context.repo.repo}!`,
+              embeds: [{
+                title: data.commit.message,
+                url: data.html_url,
+                description: `Oleh: ${data.commit.author.name}`,
+                color: 0x7289DA
+              }]
+            };
+            await fetch(process.env.DISCORD_WEBHOOK_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }} 
