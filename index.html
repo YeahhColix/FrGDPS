@@ -1,199 +1,137 @@
-<!DOCTYPE html>
-<html lang="id" dir="ltr">
+<!DOCTYPE html><html lang="id" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f0f0f">
+  <meta name="theme-color" content="#121212">
   <title>FreedomGDPS!!11 - Geometry Dash Freedom Server</title>
   <style>
-    /* Fixed font-face */
     @font-face {
       font-family: 'Pusab';
       src: url('https://fless.rf.gd/gauntlet/assets/Pusab.ttf') format('truetype');
       font-display: swap;
-    }
+    }html { scroll-behavior: smooth; overflow-y: scroll; }
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Pusab', sans-serif;
+  margin: 0; padding: 0;
+}
+header, footer {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+}
+.animated-bg {
+  background: repeating-linear-gradient(
+    45deg,
+    #2a2a2a,
+    #2a2a2a 10px,
+    #1a1a1a 10px,
+    #1a1a1a 20px
+  );
+  background-size: 200px 200px;
+  animation: scrollBG 80s linear infinite;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+}
+@keyframes scrollBG { 0% { transform: translate(0, 0); } 100% { transform: translate(-50%, -50%); } }
+nav { text-align: center; margin: 1rem 0; }
+nav button {
+  background: linear-gradient(145deg, #2c2c2c 0%, #3a3a3a 100%);
+  color: #ffffff;
+  padding: 12px 24px; margin: 0 8px;
+  border-radius: 8px; border: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer; transition: transform .2s, box-shadow .2s;
+  font-family: 'Pusab', sans-serif;
+}
+nav button:hover { transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0,0,0,0.2); }
+.actions { text-align: center; margin: 1.5rem 0; }
+.actions a {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 12px 24px;
+  background: #2979ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background .2s;
+  font-family: 'Pusab', sans-serif;
+}
+.actions a:hover { background: #5393ff; }
 
-    /* Improved scroll performance */
-    html {
-      scroll-behavior: smooth;
-      overflow-y: scroll;
-    }
+section { display: none; max-width: 800px; margin: 2rem auto; padding: 1rem; background-color: #1e1e1e; border-radius: 8px; }
+section.active { display: block; }
+.widget-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+a { color: #90caf9; text-decoration: none; }
+a:hover { color: #64b5f6; text-decoration: underline; }
+@media (max-width:480px) {
+  h1 { font-size:2.5rem; }
+  nav { flex-direction:column; gap:.5rem; }
+  nav button { margin:.5rem 0; width:90%; }
+}
 
-    /* Better background animation */
-    .animated-bg {
-      background-size: 200px 200px;
-      animation: scrollBG 80s linear infinite;
-    }
-
-    @keyframes scrollBG {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50%, -50%); }
-    }
-
-    /* Enhanced button styling */
-    nav button {
-      background: linear-gradient(145deg, #4fc3f7 0%, #29b6f6 100%);
-      padding: 12px 24px;
-      margin: 0 8px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    nav button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Smoother section transitions */
-    section {
-      display: block;
-      visibility: hidden;
-      max-width: min(90%, 800px);
-      margin: 2rem auto;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 
-        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    section.active {
-      visibility: visible;
-      pointer-events: all;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Modern responsive grid */
-    .widget-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 1rem;
-      max-width: 1200px;
-      margin: 2rem auto;
-    }
-
-    /* Accessibility improvements */
-    [lang]:not([lang="id"]) {
-      font-style: italic;
-    }
-
-    /* Better mobile experience */
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2.5rem;
-        line-height: 1.2;
-      }
-      
-      nav {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      
-      nav button {
-        margin: 0;
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Added aria roles -->
-  <div class="animated-bg" role="presentation"></div>
+  <div class="animated-bg" role="presentation"></div>  <header role="banner">
+    <h1>FreedomGDPS!!11</h1>
+    <p>Freedom means being free to do ;3</p>
+  </header>  <nav role="navigation" aria-label="Language selector">
+    <button onclick="showSection('id')">🇮🇩 Bahasa</button>
+    <button onclick="showSection('en')">🇺🇸 English</button>
+  </nav>  <div class="actions">
+    <a href="https://www.upload-apk.com/UqjVv2MrmkcDjVS" target="_blank">Download APK</a>
+    <a href="https://fless.ps.fhgdps.com/rate" target="_blank">Rate Server</a>
+    <a href="https://github.com/ThDev2/FreedomGDPS" target="_blank">Source Code</a>
+    <a href="discord.gg/YyeZ2Sxjgf" target="_blank">Join Discord</a>
+  </div>  <main role="main">
+    <section id="id" class="active" lang="id">
+      <h2>Apa itu FreedomGDPS!!11?</h2>
+      <p>FreedomGDPS!!11 adalah server pribadi Geometry Dash yang memberikan kebebasan penuh kepada pemain untuk membuat, mengupload, dan memainkan level tanpa batasan kreativitas. Kami mendukung pembuat level dari semua kalangan — dari pemula hingga profesional — untuk mengekspresikan diri mereka dalam dunia GD.</p>
+      <ul>
+        <li>Kebebasan tanpa sensor dalam berkarya</li>
+        <li>Level langsung tampil di server tanpa moderasi berlebih</li>
+        <li>Dukungan mod dan fitur unik untuk meningkatkan gameplay</li>
+        <li>Komunitas aktif dan ramah di Discord</li>
+      </ul>
+    </section><section id="en" lang="en">
+  <h2>What is FreedomGDPS!!11?</h2>
+  <p>FreedomGDPS!!11 is a Geometry Dash Private Server that provides total creative freedom. Upload and play any level instantly, no strict moderation—beginner or pro, everyone is welcome.</p>
+  <ul>
+    <li>Unfiltered freedom to create and share levels</li>
+    <li>Instant server updates without heavy moderation</li>
+    <li>Supports mods and in-game enhancements</li>
+    <li>Friendly and active Discord community</li>
+  </ul>
+</section>
 
-  <header role="banner">
-    <h1 aria-label="Freedom GDPS">FreedomGDPS!!11</h1>
-    <p role="doc-subtitle">Freedom means being free to do ;3</p>
-  </header>
+<div class="widget-container">
+  <div class="apkpure-widget" role="complementary">
+    <blockquote data-package-name="com.flessing.freedomgdps" data-language="en" class="apkpure-app-card" loading="lazy"></blockquote>
+  </div>
+  <div class="discord-widget" role="complementary">
+    <iframe title="Discord Community Widget" loading="lazy" src="https://discord.com/widget?id=876754832113958912&theme=dark" width="100%" height="500" style="min-height:400px;border:none;"></iframe>
+  </div>
+</div>
 
-  <nav role="navigation" aria-label="Language selector">
-    <button 
-      onclick="showSection('id')"
-      aria-controls="id"
-      aria-label="Switch to Indonesian language"
-    >
-      🇮🇩 Bahasa
-    </button>
-    <button 
-      onclick="showSection('en')"
-      aria-controls="en" 
-      aria-label="Switch to English language"
-    >
-      🇺🇸 English
-    </button>
-  </nav>
-
-  <!-- Added semantic section tags -->
-  <main role="main">
-    <section id="id" class="active" lang="id" aria-labelledby="id-heading">
-      <h2 id="id-heading">Apa itu FrGDPS?</h2>
-      <!-- Content unchanged -->
-    </section>
-
-    <section id="en" lang="en" aria-labelledby="en-heading">
-      <h2 id="en-heading">What is FrGDPS?</h2>
-      <!-- Content unchanged -->
-    </section>
-
-    <div class="widget-container">
-      <div class="apkpure-widget" role="complementary">
-        <!-- Added loading attribute -->
-        <blockquote 
-          data-package-name="com.flessing.freedomgdps" 
-          data-language="en" 
-          class="apkpure-app-card"
-          loading="lazy"
-        ></blockquote>
-      </div>
-
-      <div class="discord-widget" role="complementary">
-        <iframe 
-          title="Discord Community Widget"
-          loading="lazy"
-          src="https://discord.com/widget?id=876754832113958912&theme=dark" 
-          width="100%" 
-          height="500"
-          style="min-height: 400px;"
-        ></iframe>
-      </div>
-    </div>
-  </main>
-
-  <footer role="contentinfo">
-    <!-- Dynamic year update -->
-    &copy; <span id="currentYear">2025</span> FreedomGDPS!!11. 
-    <span aria-hidden="true">❤️</span>
-    <span class="sr-only">All rights reserved.</span>
-  </footer>
-
-  <script>
-    // Improved language switching
+  </main>  <footer role="contentinfo">
+    &copy; <span id="currentYear">2025</span> FreedomGDPS!!11. ❤️
+  </footer>  <script>
     function showSection(lang) {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        section.classList.toggle('active', section.id === lang);
-      });
-      
-      // Update ARIA states
-      document.querySelectorAll(`[aria-controls]`).forEach(btn => {
-        btn.setAttribute('aria-current', btn.getAttribute('aria-controls') === lang);
-      });
+      document.querySelectorAll('section').forEach(s => s.classList.toggle('active', s.id===lang));
     }
-
-    // Auto-update copyright year
-    document.getElementById('currentYear').textContent = 
-      new Date().getFullYear();
-
-    // Font loading fallback
-    document.fonts.ready.then(() => {
-      if (!document.fonts.check('1em Pusab')) {
-        document.documentElement.style.fontFamily = 'system-ui, sans-serif';
-      }
-    });
-  </script>
-</body>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script></body>
 </html>
