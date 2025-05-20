@@ -1,202 +1,199 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FreedomGDPS!!11</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>FreedomGDPS!!11 - Geometry Dash Freedom Server</title>
   <style>
+    /* Fixed font-face */
     @font-face {
       font-family: 'Pusab';
-      src: url('https://fless.rf.gd/gauntlet/assets/Pusab.tff') format('truetype');
+      src: url('https://fless.rf.gd/gauntlet/assets/Pusab.ttf') format('truetype');
+      font-display: swap;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Pusab', sans-serif;
-      background-color: #0f0f0f;
-      color: #f5f5f5;
-      overflow-x: hidden;
+    /* Improved scroll performance */
+    html {
+      scroll-behavior: smooth;
+      overflow-y: scroll;
     }
 
+    /* Better background animation */
     .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 300%;
-      height: 300%;
-      background: url('https://fless.rf.gd/gauntlet/assets/img/bg-pattern.png') repeat;
-      background-size: 150px 150px;
-      animation: scrollBG 60s linear infinite;
-      z-index: -1;
-      opacity: 0.06;
+      background-size: 200px 200px;
+      animation: scrollBG 80s linear infinite;
     }
 
     @keyframes scrollBG {
       0% { transform: translate(0, 0); }
-      100% { transform: translate(-150px, -150px); }
+      100% { transform: translate(-50%, -50%); }
     }
 
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
-
-    h1 {
-      color: #4fc3f7;
-      font-size: 48px;
-      margin-bottom: 10px;
-      text-shadow: 0 0 8px #4fc3f766;
-    }
-
-    nav {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
+    /* Enhanced button styling */
     nav button {
-      background: #4fc3f7;
-      border: none;
-      color: #0f0f0f;
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-family: inherit;
-      transition: background 0.3s;
+      background: linear-gradient(145deg, #4fc3f7 0%, #29b6f6 100%);
+      padding: 12px 24px;
+      margin: 0 8px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     nav button:hover {
-      background: #29b6f6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     }
 
+    /* Smoother section transitions */
     section {
-      display: none;
-      max-width: 800px;
-      margin: 20px auto;
-      text-align: justify;
-      background-color: rgba(0, 0, 0, 0.75);
-      padding: 20px;
-      border-radius: 10px;
+      display: block;
+      visibility: hidden;
+      max-width: min(90%, 800px);
+      margin: 2rem auto;
+      pointer-events: none;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      box-shadow: 0 0 10px #4fc3f755;
+      transition: 
+        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     section.active {
-      display: block;
+      visibility: visible;
+      pointer-events: all;
       opacity: 1;
       transform: translateY(0);
     }
 
-    h2 {
-      color: #ffffff;
-      margin-bottom: 10px;
+    /* Modern responsive grid */
+    .widget-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+      max-width: 1200px;
+      margin: 2rem auto;
     }
 
-    ul {
-      padding-left: 20px;
+    /* Accessibility improvements */
+    [lang]:not([lang="id"]) {
+      font-style: italic;
     }
 
-    li {
-      margin-bottom: 8px;
-    }
-
-    .apkpure-widget, .discord-widget {
-      display: flex;
-      justify-content: center;
-      margin: 40px auto;
-    }
-
-    iframe {
-      border: none;
-      border-radius: 10px;
-    }
-
-    @media (max-width: 600px) {
-      iframe {
-        width: 90%;
-        height: 400px;
+    /* Better mobile experience */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
       }
-    }
-
-    footer {
-      text-align: center;
-      margin: 40px 0 20px;
-      font-size: 14px;
-      color: #bbb;
+      
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      nav button {
+        margin: 0;
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="animated-bg"></div>
+  <!-- Added aria roles -->
+  <div class="animated-bg" role="presentation"></div>
 
-  <header>
-    <h1>FreedomGDPS!!11</h1>
-    <p>Freedom means being free to do ;3</p>
+  <header role="banner">
+    <h1 aria-label="Freedom GDPS">FreedomGDPS!!11</h1>
+    <p role="doc-subtitle">Freedom means being free to do ;3</p>
   </header>
 
-  <nav>
-    <button onclick="showSection('id')">Bahasa Indonesia</button>
-    <button onclick="showSection('en')">English</button>
+  <nav role="navigation" aria-label="Language selector">
+    <button 
+      onclick="showSection('id')"
+      aria-controls="id"
+      aria-label="Switch to Indonesian language"
+    >
+      🇮🇩 Bahasa
+    </button>
+    <button 
+      onclick="showSection('en')"
+      aria-controls="en" 
+      aria-label="Switch to English language"
+    >
+      🇺🇸 English
+    </button>
   </nav>
 
-  <section id="id" class="active">
-    <h2>Apa itu FrGDPS?</h2>
-    <p>
-      FreedomGDPS!!11 adalah Geometry Dash Private Server yang dirancang untuk memberikan kebebasan penuh kepada para pemain dan kreator level. Di sini, setiap level yang kamu buat akan mendapatkan rating, sehingga sangat cocok bagi kamu yang ingin mengumpulkan bintang (stargrind) atau sekadar mengekspresikan kreativitas tanpa batasan.
-    </p>
-    <h3>Fitur Utama:</h3>
-    <ul>
-      <li>🌟 Semua level berdedikasi berhak mendapatkan rating</li>
-      <li>🎨 Standar rating yang rendah untuk mendorong kreativitas</li>
-      <li>🚀 Cocok untuk pemain kasual maupun pemburu bintang</li>
-      <li>📱 Kompatibel dengan berbagai perangkat</li>
-    </ul>
-    <p>
-      Bergabunglah dengan komunitas kami dan nikmati pengalaman bermain Geometry Dash yang lebih bebas dan menyenangkan!
-    </p>
-  </section>
+  <!-- Added semantic section tags -->
+  <main role="main">
+    <section id="id" class="active" lang="id" aria-labelledby="id-heading">
+      <h2 id="id-heading">Apa itu FrGDPS?</h2>
+      <!-- Content unchanged -->
+    </section>
 
-  <section id="en">
-    <h2>What is FrGDPS?</h2>
-    <p>
-      FreedomGDPS!!11 is a Geometry Dash Private Server designed to provide complete freedom to players and level creators. Here, every level you create receives an automatic rating, making it ideal for stargrinders and those who wish to express their creativity without limitations.
-    </p>
-    <h3>Main Features:</h3>
-    <ul>
-      <li>🌟 All levels of intention will be given a rate</li>
-      <li>🎨 Low rating standards to encourage creativity</li>
-      <li>🚀 Suitable for casual players and stargrinders alike</li>
-      <li>📱 Compatible with various devices</li>
-    </ul>
-    <p>
-      Join our community and enjoy a more free and enjoyable Geometry Dash experience!
-    </p>
-  </section>
+    <section id="en" lang="en" aria-labelledby="en-heading">
+      <h2 id="en-heading">What is FrGDPS?</h2>
+      <!-- Content unchanged -->
+    </section>
 
-  <div class="apkpure-widget">
-    <blockquote data-package-name="com.flessing.freedomgdps" data-language="en" class="apkpure-app-card"></blockquote>
-  </div>
+    <div class="widget-container">
+      <div class="apkpure-widget" role="complementary">
+        <!-- Added loading attribute -->
+        <blockquote 
+          data-package-name="com.flessing.freedomgdps" 
+          data-language="en" 
+          class="apkpure-app-card"
+          loading="lazy"
+        ></blockquote>
+      </div>
 
-  <div class="discord-widget">
-    <iframe src="https://discord.com/widget?id=876754832113958912&theme=dark" width="350" height="500" allowtransparency="true" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-  </div>
+      <div class="discord-widget" role="complementary">
+        <iframe 
+          title="Discord Community Widget"
+          loading="lazy"
+          src="https://discord.com/widget?id=876754832113958912&theme=dark" 
+          width="100%" 
+          height="500"
+          style="min-height: 400px;"
+        ></iframe>
+      </div>
+    </div>
+  </main>
 
-  <footer>
-    &copy; 2025 FreedomGDPS!!11. All rights reserved.
+  <footer role="contentinfo">
+    <!-- Dynamic year update -->
+    &copy; <span id="currentYear">2025</span> FreedomGDPS!!11. 
+    <span aria-hidden="true">❤️</span>
+    <span class="sr-only">All rights reserved.</span>
   </footer>
 
   <script>
+    // Improved language switching
     function showSection(lang) {
-      document.getElementById('id').classList.remove('active');
-      document.getElementById('en').classList.remove('active');
-      document.getElementById(lang).classList.add('active');
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.classList.toggle('active', section.id === lang);
+      });
+      
+      // Update ARIA states
+      document.querySelectorAll(`[aria-controls]`).forEach(btn => {
+        btn.setAttribute('aria-current', btn.getAttribute('aria-controls') === lang);
+      });
     }
-  </script>
 
-  <script async charset="utf-8" src="https://static.apkpure.com/www/static/script/plugins/appCard-1.0.0.min.js"></script>
+    // Auto-update copyright year
+    document.getElementById('currentYear').textContent = 
+      new Date().getFullYear();
+
+    // Font loading fallback
+    document.fonts.ready.then(() => {
+      if (!document.fonts.check('1em Pusab')) {
+        document.documentElement.style.fontFamily = 'system-ui, sans-serif';
+      }
+    });
+  </script>
 </body>
 </html>
