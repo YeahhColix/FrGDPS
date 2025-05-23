@@ -1,268 +1,277 @@
-<!DOCTYPE html><html lang="id" dir="ltr">
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#121212">
-  <title>FreedomGDPS!!11 - Geometry Dash Freedom Server</title>
+  <title>FreedomGDPS!!11 - Geometry Dash Private Server</title>
   <style>
-    /* Load custom font with fallback and correct path */
+    /* Font & Variables */
     @font-face {
       font-family: 'Pusab';
       src: local('Pusab'), url('https://fless.rf.gd/gauntlet/assets/Pusab.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
       font-display: swap;
-    }:root {
-  --primary: #2979ff;
-  --secondary: #90caf9;
-  --accent: #ff4081;
-  --bg: #121212;
-  --surface: #1e1e1e;
-  --text: #e0e0e0;
-}
+    }
+    :root {
+      --primary: #2979ff;
+      --secondary: #90caf9;
+      --accent: #ff4081;
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --text: #e0e0e0;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); color: var(--text); }
+    body { margin: 0; padding: 0; font-family: 'Pusab', sans-serif; min-height: 100vh; position: relative; }
 
-* {
-  box-sizing: border-box;
-}
+    /* Animated Background */
+    .animated-bg {
+      position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background:
+        linear-gradient(45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%),
+        linear-gradient(-45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%);
+      background-size: 4px 4px;
+      animation: scrollBG 80s linear infinite;
+      z-index: -1; opacity: 0.15;
+    }
+    @keyframes scrollBG {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(50%,50%); }
+    }
 
-html {
-  scroll-behavior: smooth;
-  background: var(--bg);
-  color: var(--text);
-}
+    /* Header */
+    header {
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(45deg, #ffffff, var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(144,202,249,0.2);
+      margin: .5rem 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: var(--secondary);
+      margin: 0;
+    }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Pusab', sans-serif;
-  line-height: 1.6;
-  min-height: 100vh;
-  position: relative;
-}
+    /* Nav Tabs */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+      padding: 0 1rem;
+    }
+    nav button {
+      position: relative;
+      background: var(--surface);
+      color: var(--secondary);
+      border: 2px solid rgba(144,202,249,0.2);
+      border-radius: 12px;
+      padding: .8rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    nav button::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -150%;
+      width: 150%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(144,202,249,0.1), transparent);
+      transition: left .5s ease;
+    }
+    nav button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      color: #fff;
+    }
+    nav button:hover::before {
+      left: 100%;
+    }
 
-.animated-bg {
-  position: fixed;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background:
-    linear-gradient(45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%),
-    linear-gradient(-45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%);
-  background-size: 4px 4px;
-  animation: scrollBG 80s linear infinite;
-  z-index: -1;
-  opacity: 0.15;
-}
-@keyframes scrollBG {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(50%,50%); }
-}
+    /* Actions (APK, Demonlist, etc.) */
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .actions a, .actions button {
+      display: block;
+      text-align: center;
+      background: var(--surface);
+      color: var(--secondary);
+      text-decoration: none;
+      border: 2px solid rgba(144,202,249,0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+    }
+    .actions a:hover, .actions button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      background: var(--surface);
+      color: #fff;
+    }
 
-header {
-  padding: 4rem 1rem 2rem;
-  text-align: center;
-}
-header h1 {
-  font-size: 3.5rem;
-  margin: .5rem 0;
-  background: linear-gradient(45deg, #ffffff, var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(144,202,249,0.2);
-}
-header p {
-  font-size: 1.2rem;
-  color: var(--secondary);
-  margin: 0;
-}
+    /* Sections */
+    main { padding: 0 1rem; }
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      padding: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+    h2::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 4px; height: 80%;
+      background: var(--accent);
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+    ul { list-style: none; padding: 0; }
+    ul li {
+      padding: .8rem 1rem;
+      margin: .5rem 0;
+      background: rgba(255,255,255,0.02);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      transition: transform .3s ease;
+    }
+    ul li:hover { transform: translateX(10px); }
 
-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 2rem 0;
-  padding: 0 1rem;
-}
-nav button {
-  position: relative;
-  background: var(--surface);
-  color: var(--secondary);
-  border: 2px solid rgba(144,202,249,0.2);
-  border-radius: 12px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-nav button::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -150%;
-  width: 150%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(144,202,249,0.1), transparent);
-  transition: left 0.5s ease;
-}
-nav button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  color: #ffffff;
-}
-nav button:hover::before {
-  left: 100%;
-}
+    /* Widget Container */
+    .widget-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 2rem;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 3rem auto;
+      background: var(--surface);
+      border-radius: 16px;
+    }
+    iframe { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
-.actions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-}
-.actions a {
-  display: block;
-  text-align: center;
-  background: var(--surface);
-  color: var(--secondary);
-  text-decoration: none;
-  border: 2px solid rgba(144,202,249,0.2);
-  border-radius: 12px;
-  padding: 1.5rem;
-  font-size: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-.actions a:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  background: border-box var(--surface);
-  color: #ffffff;
-}
+    /* Footer */
+    footer {
+      background: rgba(0,0,0,0.3);
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+    }
+    footer p { margin: .5rem 0; }
 
-main {
-  padding: 0 1rem;
-}
-section {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: var(--surface);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  padding: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-section.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-h2 {
-  font-size: 2rem;
-  color: var(--primary);
-  margin-bottom: 1rem;
-  position: relative;
-  padding-left: 1rem;
-}
-h2::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 50%;
-  width: 4px; height: 80%;
-  background: var(--accent);
-  transform: translateY(-50%);
-  border-radius: 2px;
-}
-ul { list-style: none; padding: 0; }
-ul li {
-  padding: .8rem 1rem;
-  margin: .5rem 0;
-  background: rgba(255,255,255,0.02);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px;
-  transition: transform 0.3s ease;
-}
-ul li:hover { transform: translateX(10px); }
-
-.widget-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-  gap: 2rem;
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  margin: 3rem auto;
-  background: var(--surface);
-  border-radius: 16px;
-}
-iframe { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-
-footer {
-  background: rgba(0,0,0,0.3);
-  text-align: center;
-  padding: 2rem 1rem;
-  margin-top: 4rem;
-}
-footer p { margin: .5rem 0; }
-
-@media (max-width: 768px) {
-  header h1 { font-size: 2.5rem; }
-  .actions { grid-template-columns: 1fr; }
-  section { margin: 1rem auto; padding: 1.5rem; }
-  nav { flex-direction: column; }
-}
-
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.5rem; }
+      .actions { grid-template-columns: 1fr; }
+      section { margin: 1rem auto; padding: 1.5rem; }
+      nav { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <div class="animated-bg" aria-hidden="true"></div>  <header>
+  <div class="animated-bg" aria-hidden="true"></div>
+
+  <header>
     <h1>FreedomGDPS!!11</h1>
     <p>Where Creativity Meets Freedom</p>
-  </header>  <nav>
-    <button onclick="showSection('id')">🇮🇩 Bahasa Indonesia</button>
-    <button onclick="showSection('en')">🇺🇸 English</button>
-  </nav>  <div class="actions">
+  </header>
+
+  <nav>
+    <button data-target="id">🇮🇩 Bahasa Indonesia</button>
+    <button data-target="en">🇺🇸 English</button>
+  </nav>
+
+  <div class="actions">
     <a href="https://m.apkpure.com/frgdps/com.flessing.freedomgdps/download" target="_blank">📲 Get APK</a>
+    <a href="/demonlist">😈 Demonlist</a>
     <a href="https://gdpshub.com/gdps/2924" target="_blank">⭐ Rate Us</a>
-    <a href="https://github.com/ThDev2/FreedomGDPS" target="_blank">💻 Source Code</a>
+    <a href="https://github.com/ThDev2/FrGDPS" target="_blank">💻 Source Code</a>
     <a href="https://discord.gg/YyeZ2Sxjgf" target="_blank">🎮 Join Discord</a>
-  </div>  <main>
+  </div>
+
+  <main>
     <section id="id" class="active">
-      <h2>Apa itu FreedomGDPS?</h2>
-      <p>Sebuah surga kreativitas untuk pemain Geometry Dash yang mengutamakan kebebasan tanpa batas.</p>
+      <h2>Apa itu FreedomGDPS!!11?</h2>
+      <p>FreedomGDPS!!11 adalah server Geometry Dash buatan <strong>Fless</strong> &amp; komunitas, tempat kreativitas bertemu kebebasan penuh.</p>
       <ul>
         <li>🛠️ Sistem rating fleksibel</li>
         <li>🎨 Ekspresi kreatif tanpa sensor</li>
-        <li>🚀 Optimasi untuk semua perangkat</li>
-        <li>🤝 Komunitas aktif dan suportif</li>
+        <li>🚀 Optimal untuk semua perangkat</li>
+        <li>🤝 Komunitas aktif &amp; suportif</li>
       </ul>
-    </section><section id="en">
-  <h2>About FreedomGDPS!!11</h2>
-  <p>A creative sanctuary for GD players, emphasizing unlimited freedom.</p>
-  <ul>
-    <li>💡 Flexible rating system</li>
-    <li>🌈 Unlimited creative freedom</li>
-    <li>⚡ Optimized performance</li>
-    <li>👥 Active supportive community</li>
-  </ul>
-</section>
+    </section>
 
-<div class="widget-container">
-  <div class="apkpure-widget">  
-    <blockquote data-package-name="com.flessing.freedomgdps" data-language="en" class="apkpure-app-card" loading="lazy"></blockquote>
-  </div>
-  <div class="discord-widget">
-    <iframe src="https://discord.com/widget?id=876754832113958912&theme=dark" width="100%" height="500" loading="lazy"></iframe>
-  </div>
-</div>
+    <section id="en">
+      <h2>About FreedomGDPS!!11</h2>
+      <p>FreedomGDPS!!11 by <strong>Fless</strong> &amp; community is a Geometry Dash server offering unlimited creative freedom.</p>
+      <ul>
+        <li>💡 Flexible rating system</li>
+        <li>🌈 Unlimited creative freedom</li>
+        <li>⚡ Optimized performance</li>
+        <li>👥 Active supportive community</li>
+      </ul>
+    </section>
 
-  </main>  <footer>
+    <div class="widget-container">
+      <div class="apkpure-widget">
+        <blockquote data-package-name="com.flessing.freedomgdps" data-language="en" class="apkpure-app-card" loading="lazy"></blockquote>
+      </div>
+      <div class="discord-widget">
+        <iframe src="https://discord.com/widget?id=876754832113958912&theme=dark" width="100%" height="500" loading="lazy"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer>
     <p>© <span id="currentYear"></span> FreedomGDPS!!11</p>
-    <p>Made with ❤️ by Fless &amp; Community</p>
-  </footer>  <script>
-    function showSection(lang) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.toggle('active', sec.id===lang));
-    }
+    <p>Made with ❤️ by Fless &amp; community</p>
+  </footer>
+
+  <script>
+    // Toggle sections and scroll into view
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+        document.querySelectorAll('main section').forEach(sec => {
+          sec.classList.toggle('active', sec.id === target);
+        });
+        document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+    // Dynamic year
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-  </script></body>
+  </script>
+</body>
 </html>
