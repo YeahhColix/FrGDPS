@@ -35,7 +35,7 @@
 ### Core Features
 ```diff
 + Basic server functionality
-+ Custom level sharing
+? Uploadsong Feature
 + Experimental tools suite
 ! Partial database support
 - Advanced moderation system
