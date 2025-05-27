@@ -69,18 +69,14 @@
     <a href="/privacy.html">Policy & Privacy</a>
   </div>
 
-  <!-- GitHub Embed Card -->
-  <div class="box" id="github-card">
-    <h2>Repository on GitHub</h2>
-    <p>Loading info...</p>
-  </div>
-
   <!-- SoundCloud Embed -->
   <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%23c1dae7&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
   <div style="font-size: 10px; color: #cccccc;">
     <a href="https://soundcloud.com/fless-770078712" target="_blank" style="color: #cccccc;">Fless</a> · 
     <a href="https://soundcloud.com/fless-770078712/lazycar-superb" target="_blank" style="color: #cccccc;">Lazycar - Superb</a>
   </div>
+
+<iframe src="https://discord.com/widget?id=876754832113958912&theme=dark" width="100%" height="500" loading="lazy"></iframe>
 
   <footer>
     Website by Fless • FreedomGDPS!!11 &copy; <span id="year"></span>
@@ -90,23 +86,6 @@
     // Dynamic Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // GitHub Fetch
-    fetch("https://api.github.com/repos/ThDev2/FrGDPS")
-      .then(res => res.json())
-      .then(repo => {
-        const el = document.getElementById("github-card");
-        el.innerHTML = `
-          <h2>Repository on GitHub</h2>
-          <p><a href="${repo.html_url}" target="_blank">${repo.full_name}</a></p>
-          <p>${repo.description || "Tidak ada deskripsi."}</p>
-          <p style="color:#aaa;font-size:0.9rem;">
-            ★ ${repo.stargazers_count} • Forks: ${repo.forks_count} • Last updated: ${new Date(repo.updated_at).toLocaleDateString()}
-          </p>
-        `;
-      })
-      .catch(() => {
-        document.getElementById("github-card").innerHTML = "<p style='color:red;'>Gagal mengambil data GitHub.</p>";
-      });
   </script>
 
 </body>
