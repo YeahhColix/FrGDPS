@@ -1,277 +1,113 @@
 <!DOCTYPE html>
-<html lang="id" dir="ltr">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#121212">
-  <title>FreedomGDPS!!11 - Geometry Dash Private Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="FreedomGDPS!!11 - Geometry Dash Private Server Buatan Orang Indonesia yang paling bebas!"/>
+  <meta name="keywords" content="FreedomGDPS, GDPS, Geometry Dash Server, GDPS Indonesia, fgdps, rgdps, FreedomGDPS!!, efgedepees, Fgdps, Freedom GDPS"/>
+  <meta name="author" content="Fless"/>
+  <meta name="robots" content="index, follow">
+  <title>FreedomGDPS!!11 - Server Geometry Dash Paling Bebas</title>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="application-name" content="FreedomGDPS!!11">
+  <meta name="msapplication-TileColor" content="#121212">
+  <meta name="msapplication-TileImage" content="https://fless.ps.fhgdps.com/dashboard/icon.png">
+  <link rel="icon" type="image/png" href="https://fless.ps.fhgdps.com/dashboard/icon.png"/>
+  <link rel="canonical" href="https://fless.netlify.app/"/>
+
+  <meta property="og:title" content="FreedomGDPS!!11 - GDPS Paling Bebas"/>
+  <meta property="og:description" content="Geometry Dash Private Server Buatan Orang Indonesia."/>
+  <meta property="og:url" content="https://fless.netlify.app/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://fless.ps.fhgdps.com/dashboard/icon.png"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://fless.netlify.app",
+    "name": "FreedomGDPS!!11",
+    "author": {"@type": "Person","name": "Fless"},
+    "description": "Geometry Dash Private Server Paling Bebas.",
+    "inLanguage": "id"
+  }
+  </script>
+
   <style>
-    /* Font & Variables */
-    @font-face {
-      font-family: 'Pusab';
-      src: local('Pusab'), url('https://fless.rf.gd/gauntlet/assets/Pusab.ttf') format('truetype');
-      font-display: swap;
-    }
-    :root {
-      --primary: #2979ff;
-      --secondary: #90caf9;
-      --accent: #ff4081;
-      --bg: #121212;
-      --surface: #1e1e1e;
-      --text: #e0e0e0;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: var(--bg); color: var(--text); }
-    body { margin: 0; padding: 0; font-family: 'Pusab', sans-serif; min-height: 100vh; position: relative; }
-
-    /* Animated Background */
-    .animated-bg {
-      position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-      background:
-        linear-gradient(45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%),
-        linear-gradient(-45deg, rgba(42,42,42,0.1) 25%, transparent 25%, transparent 75%, rgba(42,42,42,0.1) 75%);
-      background-size: 4px 4px;
-      animation: scrollBG 80s linear infinite;
-      z-index: -1; opacity: 0.15;
-    }
-    @keyframes scrollBG {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(50%,50%); }
-    }
-
-    /* Header */
-    header {
-      padding: 4rem 1rem 2rem;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 3.5rem;
-      background: linear-gradient(45deg, #ffffff, var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 15px rgba(144,202,249,0.2);
-      margin: .5rem 0;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: var(--secondary);
-      margin: 0;
-    }
-
-    /* Nav Tabs */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin: 2rem 0;
-      padding: 0 1rem;
-    }
-    nav button {
-      position: relative;
-      background: var(--surface);
-      color: var(--secondary);
-      border: 2px solid rgba(144,202,249,0.2);
-      border-radius: 12px;
-      padding: .8rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
-    nav button::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -150%;
-      width: 150%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(144,202,249,0.1), transparent);
-      transition: left .5s ease;
-    }
-    nav button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      color: #fff;
-    }
-    nav button:hover::before {
-      left: 100%;
-    }
-
-    /* Actions (APK, Demonlist, etc.) */
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-    .actions a, .actions button {
-      display: block;
-      text-align: center;
-      background: var(--surface);
-      color: var(--secondary);
-      text-decoration: none;
-      border: 2px solid rgba(144,202,249,0.2);
-      border-radius: 12px;
-      padding: 1rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
-    }
-    .actions a:hover, .actions button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      background: var(--surface);
-      color: #fff;
-    }
-
-    /* Sections */
-    main { padding: 0 1rem; }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: var(--surface);
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.05);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      padding: 2rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    section.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      position: relative;
-      padding-left: 1rem;
-    }
-    h2::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 50%;
-      width: 4px; height: 80%;
-      background: var(--accent);
-      transform: translateY(-50%);
-      border-radius: 2px;
-    }
-    ul { list-style: none; padding: 0; }
-    ul li {
-      padding: .8rem 1rem;
-      margin: .5rem 0;
-      background: rgba(255,255,255,0.02);
-      border-left: 3px solid var(--accent);
-      border-radius: 4px;
-      transition: transform .3s ease;
-    }
-    ul li:hover { transform: translateX(10px); }
-
-    /* Widget Container */
-    .widget-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-      gap: 2rem;
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 3rem auto;
-      background: var(--surface);
-      border-radius: 16px;
-    }
-    iframe { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-
-    /* Footer */
-    footer {
-      background: rgba(0,0,0,0.3);
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-    }
-    footer p { margin: .5rem 0; }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 2.5rem; }
-      .actions { grid-template-columns: 1fr; }
-      section { margin: 1rem auto; padding: 1.5rem; }
-      nav { flex-direction: column; }
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    @font-face{font-family:'Pusab';src:url('gauntlet/assets/Pusab.ttf') format('truetype');font-display:swap;}
+    body{font-family:'Pusab',sans-serif;background:#121212 url('gauntlet/assets/img/bg-pattern.png') repeat;animation:bgScroll 40s linear infinite;color:#e0e0e0;text-align:center;padding:2rem;min-height:100vh;}
+    @keyframes bgScroll{from{background-position:0 0;}to{background-position:-1000px 0;}}
+    .bobbing{display:inline-block;animation:bob 2.5s ease-in-out infinite;}
+    @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+    h1{font-size:2.2rem;margin-bottom:0.5rem;color:#fff;}
+    p{font-size:1rem;color:#bbb;margin-bottom:2rem;}
+    .nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;max-width:800px;margin:0 auto 2rem;}
+    .nav a{display:block;padding:1rem;border-radius:8px;background:#1e1e1e;color:#ddd;text-decoration:none;box-shadow:0 2px 4px rgba(0,0,0,0.4);transition:background .2s,transform .2s;font-weight:bold;}
+    .nav a:hover{background:#2a2a2a;transform:translateY(-3px);}
+    .box{background:#1a1a1a;padding:1.5rem;border-radius:12px;max-width:600px;margin:2rem auto;text-align:left;}
+    .box h2{text-align:center;margin-bottom:1rem;color:#fff;}
+    .box a{color:#58a6ff;text-decoration:none;font-weight:bold;}
+    .box p{color:#ccc;font-size:.95rem;}
+    footer{margin-top:2rem;font-size:.85rem;color:#888;text-align:center;}
   </style>
 </head>
 <body>
-  <div class="animated-bg" aria-hidden="true"></div>
 
-  <header>
-    <h1>FreedomGDPS!!11</h1>
-    <p>Where Creativity Meets Freedom</p>
-  </header>
+  <h1 class="bobbing">Welcome To FreedomGDPS!!11</h1>
+  <p class="bobbing">Freedom means being free to do ;3</p>
 
-  <nav>
-    <button data-target="id">🇮🇩 Bahasa Indonesia</button>
-    <button data-target="en">🇺🇸 English</button>
-  </nav>
-
-  <div class="actions">
-    <a href="https://m.apkpure.com/frgdps/com.flessing.freedomgdps/download" target="_blank">📲 Get APK</a>
-    <a href="/demonlist">😈 Demonlist</a>
-    <a href="https://gdpshub.com/gdps/2924" target="_blank">⭐ Rate Us</a>
-    <a href="https://github.com/ThDev2/FrGDPS" target="_blank">💻 Source Code</a>
-    <a href="https://discord.gg/YyeZ2Sxjgf" target="_blank">🎮 Join Discord</a>
+  <div class="nav">
+    <a href="https://fless.ps.fhgdps.com">Main Page</a>
+    <a href="/dashboard/index.html">Dashboard Mini</a>
+    <a href="/download/index.html">Download Page</a>
+    <a href="/tools/index.html">Tools Page</a>
+    <a href="/rate/index.html">Rating System</a>
+    <a href="/gauntlet/index.html">Gauntlet Submission</a>
+    <a href="/sdk/index.html">Social Page</a>
+    <a href="/pap/index.html">Policy & Privacy</a>
   </div>
 
-  <main>
-    <section id="id" class="active">
-      <h2>Apa itu FreedomGDPS!!11?</h2>
-      <p>FreedomGDPS!!11 adalah server Geometry Dash buatan <strong>Fless</strong> &amp; komunitas, tempat kreativitas bertemu kebebasan penuh.</p>
-      <ul>
-        <li>🛠️ Sistem rating fleksibel</li>
-        <li>🎨 Ekspresi kreatif tanpa sensor</li>
-        <li>🚀 Optimal untuk semua perangkat</li>
-        <li>🤝 Komunitas aktif &amp; suportif</li>
-      </ul>
-    </section>
+  <!-- GitHub Embed Card -->
+  <div class="box" id="github-card">
+    <h2>Repository on GitHub</h2>
+    <p>Loading info...</p>
+  </div>
 
-    <section id="en">
-      <h2>About FreedomGDPS!!11</h2>
-      <p>FreedomGDPS!!11 by <strong>Fless</strong> &amp; community is a Geometry Dash server offering unlimited creative freedom.</p>
-      <ul>
-        <li>💡 Flexible rating system</li>
-        <li>🌈 Unlimited creative freedom</li>
-        <li>⚡ Optimized performance</li>
-        <li>👥 Active supportive community</li>
-      </ul>
-    </section>
-
-    <div class="widget-container">
-      <div class="apkpure-widget">
-        <blockquote data-package-name="com.flessing.freedomgdps" data-language="en" class="apkpure-app-card" loading="lazy"></blockquote>
-      </div>
-      <div class="discord-widget">
-        <iframe src="https://discord.com/widget?id=876754832113958912&theme=dark" width="100%" height="500" loading="lazy"></iframe>
-      </div>
-    </div>
-  </main>
+  <!-- SoundCloud Embed -->
+  <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%23c1dae7&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+  <div style="font-size: 10px; color: #cccccc;">
+    <a href="https://soundcloud.com/fless-770078712" target="_blank" style="color: #cccccc;">Fless</a> · 
+    <a href="https://soundcloud.com/fless-770078712/lazycar-superb" target="_blank" style="color: #cccccc;">Lazycar - Superb</a>
+  </div>
 
   <footer>
-    <p>© <span id="currentYear"></span> FreedomGDPS!!11</p>
-    <p>Made with ❤️ by Fless &amp; community</p>
+    Website by Fless • FreedomGDPS!!11 &copy; <span id="year"></span>
   </footer>
 
   <script>
-    // Toggle sections and scroll into view
-    document.querySelectorAll('nav button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
-        document.querySelectorAll('main section').forEach(sec => {
-          sec.classList.toggle('active', sec.id === target);
-        });
-        document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+    // Dynamic Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // GitHub Fetch
+    fetch("https://api.github.com/repos/ThDev2/FrGDPS")
+      .then(res => res.json())
+      .then(repo => {
+        const el = document.getElementById("github-card");
+        el.innerHTML = `
+          <h2>Repository on GitHub</h2>
+          <p><a href="${repo.html_url}" target="_blank">${repo.full_name}</a></p>
+          <p>${repo.description || "Tidak ada deskripsi."}</p>
+          <p style="color:#aaa;font-size:0.9rem;">
+            ★ ${repo.stargazers_count} • Forks: ${repo.forks_count} • Last updated: ${new Date(repo.updated_at).toLocaleDateString()}
+          </p>
+        `;
+      })
+      .catch(() => {
+        document.getElementById("github-card").innerHTML = "<p style='color:red;'>Gagal mengambil data GitHub.</p>";
       });
-    });
-    // Dynamic year
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
