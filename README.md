@@ -1,1 +1,1 @@
-Private for Netflify
+Public Code GDPS For Everyone.
