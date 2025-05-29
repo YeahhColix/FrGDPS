@@ -15,73 +15,146 @@
     }
     body {
       font-family: 'Pusab', sans-serif;
-      background: linear-gradient(160deg, #0a0a0a, #141414);
-      color: #f0f0f0;
+      background: #0a0a0a;
+      color: #fff;
       min-height: 100vh;
       position: relative;
       padding-bottom: 60px;
+      overflow-x: hidden;
     }
     body::before {
       content: "";
       position: fixed; top:0; left:0;
-      width:200%; height:200%;
-      background: url('https://fless.netlify.app/assets/bg-pattern.png') repeat;
+      width:100%; height:100%;
+      background: 
+        linear-gradient(135deg, rgba(255,0,255,0.05) 0%, rgba(0,255,255,0.05) 100%),
+        url('https://fless.netlify.app/assets/bg-pattern.png') repeat;
       background-size: contain;
-      opacity: 0.04;
+      opacity: 0.1;
       animation: scrollBG 60s linear infinite;
       z-index: -1;
     }
     @keyframes scrollBG { from { transform: translate(0,0);} to { transform: translate(-50%,-50%);} }
+    @keyframes pulse { 
+      0% { opacity: 0.7; } 
+      50% { opacity: 1; }
+      100% { opacity: 0.7; } 
+    }
 
     #rotateNotice {
       position: fixed; inset:0;
       background: rgba(0,0,0,0.95);
       display:flex; align-items:center; justify-content:center;
       text-align:center; z-index:9999; padding:2rem;
+      font-family: 'Pusab', sans-serif;
     }
-    #rotateNotice.hidden { display:none; }
-    #rotateNotice h2 { font-size:1.6rem; margin-bottom:0.5rem; }
+    #rotateNotice h2 { 
+      font-size:1.6rem; 
+      margin-bottom:0.5rem;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
     #rotateNotice p { color:#ccc; margin-bottom:1.5rem; }
     #rotateNotice button {
-      background:#ff4081; color:#fff;
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      color:#000;
       padding:0.7rem 1.3rem; margin:0.4rem;
       border:none; border-radius:8px; font-size:1rem;
       cursor:pointer; transition:all .2s;
+      font-family: 'Pusab', sans-serif;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
     }
-    #rotateNotice button:hover { opacity:0.9; }
+    #rotateNotice button:hover { 
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,255,255,0.8);
+    }
 
     #mainContent.hidden { display:none; }
     a.back-btn {
       display:inline-block; margin:1.5rem auto; text-align:center;
-      background:#ff4081; color:#fff;
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      color:#000;
       padding:0.6rem 1.2rem; border-radius:8px;
       text-decoration:none; font-size:0.95rem;
-      transition:background .2s;
+      transition:all .2s;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
     }
-    a.back-btn:hover { background:#e33370; }
+    a.back-btn:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(0,255,255,0.8);
+    }
 
-    h1 { font-size:2rem; text-align:center; margin:1.5rem 0 0.5rem; }
-    .subtitle { text-align:center; color:#bbb; font-size:0.95rem; margin-bottom:2rem; }
+    h1 { 
+      font-size:2rem; 
+      text-align:center; 
+      margin:1.5rem 0 0.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      animation: pulse 2s infinite;
+    }
+    .subtitle { 
+      text-align:center; 
+      color:#bbb; 
+      font-size:0.95rem; 
+      margin-bottom:2rem;
+      text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
 
     .rate-container {
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap:1.2rem;
+      gap:1.5rem;
       padding:0 1rem 2rem;
     }
     .rate-box {
-      background:#1a1a1a; border-radius:14px;
-      padding:1.2rem; box-shadow:0 0 10px rgba(0,0,0,0.4);
-      transition:transform .3s;
+      background: rgba(20,20,20,0.8);
+      border-radius:14px;
+      padding:1.2rem; 
+      box-shadow:0 0 20px rgba(0,255,255,0.2);
+      transition: all 0.3s;
+      border: 1px solid rgba(0,255,255,0.2);
+      position: relative;
+      overflow: hidden;
     }
-    .rate-box:hover { transform:translateY(-5px); }
+    .rate-box::after {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,0,255,0) 0%,
+        rgba(255,0,255,0.1) 50%,
+        rgba(255,0,255,0) 100%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    .rate-box:hover { 
+      transform:translateY(-5px);
+      box-shadow:0 0 30px rgba(0,255,255,0.4);
+    }
     .rate-box h2 {
-      color:#ff4081; font-size:1.1rem; margin-bottom:0.8rem;
-      position:relative; padding-left:0.6rem;
+      color:#00ffff; 
+      font-size:1.1rem; 
+      margin-bottom:0.8rem;
+      position:relative; 
+      padding-left:0.6rem;
+      text-shadow: 0 0 5px #00ffff;
     }
     .rate-box h2::before {
-      content:""; position:absolute; left:0; top:50%; transform:translateY(-50%);
-      width:4px; height:100%; background:#ff4081; border-radius:2px;
+      content:""; 
+      position:absolute; 
+      left:0; 
+      top:50%; 
+      transform:translateY(-50%);
+      width:4px; 
+      height:100%; 
+      background:#00ffff;
+      border-radius:2px;
+      box-shadow: 0 0 5px #00ffff;
     }
 
     /* Progress Bars */
@@ -90,22 +163,55 @@
       display:flex; justify-content:space-between;
       font-size:0.9rem; margin-bottom:0.3rem; color:#ddd;
     }
+    .progress-group label span:first-child {
+      color: #ff00ff;
+      text-shadow: 0 0 3px #ff00ff;
+    }
+    .progress-group label span:last-child {
+      color: #00ffff;
+      text-shadow: 0 0 3px #00ffff;
+    }
     .progress-bar {
       width:100%; height:8px; background:#262626;
       border-radius:4px; overflow:hidden;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
     }
     .progress-bar span {
-      display:block; height:100%; background:#ff4081;
+      display:block; height:100%; 
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 5px rgba(0,255,255,0.5);
+      transition: width 0.5s ease-out;
     }
 
-    .rate-box p { font-size:0.9rem; color:#c9c9c9; margin-top:0.8rem; }
+    .rate-box p { 
+      font-size:0.9rem; 
+      color:#c9c9c9; 
+      margin-top:0.8rem;
+      line-height: 1.4;
+    }
     footer {
       position:fixed; bottom:0; left:0; right:0;
       text-align:center; padding:1rem;
-      font-size:0.75rem; color:#888; background:rgba(10,10,10,0.8);
+      font-size:0.75rem; color:#888; 
+      background:rgba(10,10,10,0.8);
+      backdrop-filter: blur(5px);
+      border-top: 1px solid rgba(0,255,255,0.1);
     }
+    footer span {
+      color: #00ffff;
+      text-shadow: 0 0 3px #00ffff;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(30deg); }
+      100% { transform: translateX(100%) rotate(30deg); }
+    }
+
     @media (max-width: 600px) {
       h1 { font-size:1.5rem; }
+      .rate-container {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -169,11 +275,11 @@
         <h2>Mythic</h2>
         <div class="progress-group"><label><span>Layout</span><span>89%</span></label><div class="progress-bar"><span style="width:89%"></span></div></div>
         <div class="progress-group"><label><span>Deco</span><span>89%</span></label><div class="progress-bar"><span style="width:89%"></span></div></div>
-        <div class="progress-group"><label><span>Gameplay</span><span>89%</span></label><div class="progress-bar"><span style="width:89%%"></span></div></div>
+        <div class="progress-group"><label><span>Gameplay</span><span>89%</span></label><div class="progress-bar"><span style="width:89%"></span></div></div>
         <p>Nyaris sempurna. Kreatif, fun, dekorasi beda dari yang lain. Voting khusus akan diadakan untuk level Mythic.</p>
       </div>
     </div>
-    <footer>Rating System by Fless | FreedomGDPS!!11 &copy; <span id="year"></span></footer>
+    <footer>Rating System by <span>Fless</span> | FreedomGDPS!!11 &copy; <span id="year"></span></footer>
   </div>
 
   <script>
@@ -182,6 +288,18 @@
     const main = document.getElementById('mainContent');
     document.getElementById('btnLandscape').onclick = () => { notice.classList.add('hidden'); main.classList.remove('hidden'); };
     document.getElementById('btnAnyway').onclick = () => { notice.classList.add('hidden'); main.classList.remove('hidden'); };
+    
+    // Add animation to progress bars on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const progressBars = document.querySelectorAll('.progress-bar span');
+      progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 100);
+      });
+    });
   </script>
 </body>
 </html>
