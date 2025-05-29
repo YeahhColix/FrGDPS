@@ -1,1 +1,1 @@
-Public Code GDPS For Everyone.
+Free Public Code GDPS Static HTML For Everyone.
