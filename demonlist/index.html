@@ -1,43 +1,515 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FrGDPS Demon List</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2979ff;
+      --primary-dark: #1a68e6;
+      --secondary: #90caf9;
+      --accent: #ff4081;
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --surface-light: #2a2a2a;
+      --text: #e0e0e0;
+      --text-muted: #aaaaaa;
+      --glow: rgba(41, 121, 255, 0.3);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.3);
+      --success: #4caf50;
+      --warning: #ff9800;
+      --error: #f44336;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--surface), var(--surface-light));
+      color: #fff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      background: linear-gradient(45deg, var(--secondary), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+
+    nav a:hover, nav a.active {
+      background: rgba(144, 202, 249, 0.1);
+    }
+
+    nav a i {
+      margin-right: 0.3rem;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Table Styles */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 2rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .difficulty {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .easy { background: #4caf50; }
+    .medium { background: #ff9800; }
+    .hard { background: #f44336; }
+    .insane { background: #9c27b0; }
+    .extreme { background: #2196f3; }
+
+    /* Form Styles */
+    .form-container {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+
+    .form-container h2 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--glow);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--glow);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        display: none;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .form-container, .table-container {
+        padding: 1rem;
+      }
+
+      th, td {
+        padding: 0.8rem 0.5rem;
+      }
+    }
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+    .mt-2 { margin-top: 2rem; }
+    .mb-2 { margin-bottom: 2rem; }
+    .hidden { display: none !important; }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--surface-light);
+      color: white;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success); }
+    .toast.error { border-left: 4px solid var(--error); }
+    .toast.warning { border-left: 4px solid var(--warning); }
+  </style>
 </head>
 <body>
   <header>
-    <h1>FreedomGDPS!!11 Demon List</h1>
-    <nav>
-      <a href="index.html">List</a>
-      <a href="submit.html">Submit</a>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h1>FrGDPS Demon List</h1>
+    <nav id="mainNav">
+      <a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a>
+      <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
+      <a href="#"><i class="fas fa-info-circle"></i> About</a>
     </nav>
   </header>
+
   <main>
-    <section>
-      <p>Selamat datang di daftar resmi level tersulit di FrGDPS. Lihat leaderboard demon di bawah ini:</p>
+    <section id="listPage">
+      <div class="text-center">
+        <h2>Official FrGDPS Demon List</h2>
+        <p>Ranking of the hardest levels in Freedom GDPS</p>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Level Name</th>
+              <th>Difficulty</th>
+              <th>Creator</th>
+              <th>Verifier</th>
+              <th>Video</th>
+            </tr>
+          </thead>
+          <tbody id="demonTableBody">
+            <tr>
+              <td colspan="6" class="text-center">Loading demon list...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nama Level</th>
-            <th>Creator</th>
-            <th>Verifier</th>
-            <th>Video</th>
-          </tr>
-        </thead>
-        <tbody id="demon-table-body">
-          <tr><td colspan="5">Loading...</td></tr>
-        </tbody>
-      </table>
+
+    <section id="submitPage" class="hidden">
+      <div class="form-container">
+        <h2><i class="fas fa-plus-circle"></i> Submit New Demon</h2>
+        <form id="submitForm">
+          <div class="form-group">
+            <label for="levelName">Level Name</label>
+            <input type="text" id="levelName" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="levelCreator">Creator</label>
+            <input type="text" id="levelCreator" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="levelVerifier">Verifier</label>
+            <input type="text" id="levelVerifier" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="levelDifficulty">Difficulty</label>
+            <select id="levelDifficulty" required>
+              <option value="">Select difficulty</option>
+              <option value="easy">Easy Demon</option>
+              <option value="medium">Medium Demon</option>
+              <option value="hard">Hard Demon</option>
+              <option value="insane">Insane Demon</option>
+              <option value="extreme">Extreme Demon</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="levelVideo">Video URL</label>
+            <input type="url" id="levelVideo" required>
+          </div>
+          
+          <button type="submit" class="btn btn-block">
+            <i class="fas fa-paper-plane"></i> Submit Level
+          </button>
+        </form>
+      </div>
     </section>
   </main>
+
+  <div id="toast" class="toast"></div>
+
   <footer>
-    <p>© 2025 FreedomGDPS!!11</p>
+    <p>© 2025 Freedom GDPS | Demon List v2.0</p>
   </footer>
-  <script type="module" src="app.js"></script>
+
+  <script type="module">
+    // Firebase Configuration
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue, 
+      push, 
+      set,
+      orderByChild,
+      query,
+      limitToLast
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDs2sGkNFJJqPOnx1fmeFQcGHXH1yFmPVc",
+      authDomain: "frgdpsdemon.firebaseapp.com",
+      databaseURL: "https://frgdpsdemon-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "frgdpsdemon",
+      storageBucket: "frgdpsdemon.firebasestorage.app",
+      messagingSenderId: "459095738556",
+      appId: "1:459095738556:web:2b73dfa2694b977655e8b9",
+      measurementId: "G-QMQ5G3FQ90"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // DOM Elements
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    const demonTableBody = document.getElementById('demonTableBody');
+    const submitForm = document.getElementById('submitForm');
+    const toast = document.getElementById('toast');
+    const listPage = document.getElementById('listPage');
+    const submitPage = document.getElementById('submitPage');
+
+    // Mobile Menu Toggle
+    mobileMenuBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+
+    // Show Toast Notification
+    function showToast(message, type = 'success') {
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Load Demon List
+    function loadDemonList() {
+      const demonsRef = query(ref(db, 'demons'), orderByChild('timestamp'), limitToLast(50));
+      
+      onValue(demonsRef, (snapshot) => {
+        const data = snapshot.val();
+        demonTableBody.innerHTML = '';
+        
+        if (data) {
+          let index = 1;
+          Object.entries(data).reverse().forEach(([key, demon]) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${index++}</td>
+              <td>${demon.name}</td>
+              <td><span class="difficulty ${demon.difficulty || 'hard'}">${demon.difficulty || 'Hard'}</span></td>
+              <td>${demon.creator}</td>
+              <td>${demon.verifier}</td>
+              <td><a href="${demon.video}" target="_blank" class="btn"><i class="fas fa-video"></i> Watch</a></td>
+            `;
+            demonTableBody.appendChild(tr);
+          });
+        } else {
+          demonTableBody.innerHTML = `
+            <tr>
+              <td colspan="6" class="text-center">No demons submitted yet. Be the first!</td>
+            </tr>
+          `;
+        }
+      });
+    }
+
+    // Handle Form Submission
+    submitForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('levelName').value;
+      const creator = document.getElementById('levelCreator').value;
+      const verifier = document.getElementById('levelVerifier').value;
+      const difficulty = document.getElementById('levelDifficulty').value;
+      const video = document.getElementById('levelVideo').value;
+      
+      // Basic validation
+      if (!name || !creator || !verifier || !difficulty || !video) {
+        showToast('Please fill all fields', 'error');
+        return;
+      }
+      
+      const newDemonRef = push(ref(db, 'demons'));
+      set(newDemonRef, {
+        name,
+        creator,
+        verifier,
+        difficulty,
+        video,
+        timestamp: Date.now()
+      }).then(() => {
+        showToast('Demon submitted successfully!');
+        submitForm.reset();
+      }).catch((error) => {
+        showToast(`Error: ${error.message}`, 'error');
+      });
+    });
+
+    // Router for pages
+    function handleRouting() {
+      const path = window.location.pathname.split('/').pop();
+      
+      if (path === 'submit.html') {
+        listPage.classList.add('hidden');
+        submitPage.classList.remove('hidden');
+        document.title = 'Submit Demon - FrGDPS';
+      } else {
+        loadDemonList();
+      }
+    }
+
+    // Initialize
+    handleRouting();
+  </script>
 </body>
 </html>
