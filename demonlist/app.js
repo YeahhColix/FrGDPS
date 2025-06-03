@@ -14,24 +14,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
-const list = document.getElementById("demon-list");
+const tbody = document.getElementById("demon-table-body");
 const demonsRef = ref(db, "demons");
 
 onValue(demonsRef, (snapshot) => {
   const data = snapshot.val();
-  list.innerHTML = "";
+  tbody.innerHTML = "";
   if (data) {
+    let index = 1;
     Object.entries(data).forEach(([key, val]) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <strong>${val.name}</strong> by ${val.creator} <br>
-        <em>Verified by:</em> ${val.verifier}<br>
-        <a href="${val.video}" target="_blank">Lihat Video</a>
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index++}</td>
+        <td>${val.name}</td>
+        <td>${val.creator}</td>
+        <td>${val.verifier}</td>
+        <td><a href="${val.video}" target="_blank">Tonton</a></td>
       `;
-      list.appendChild(li);
+      tbody.appendChild(tr);
     });
   } else {
-    list.innerHTML = "<li>Belum ada level terdaftar.</li>";
+    tbody.innerHTML = "<tr><td colspan='5'>Belum ada level terdaftar.</td></tr>";
   }
 });
