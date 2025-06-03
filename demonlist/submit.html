@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Demon - FrGDPS Demon List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2979ff;
+      --primary-dark: #1a68e6;
+      --secondary: #90caf9;
+      --accent: #ff4081;
+      --bg: #121212;
+      --surface: #1e1e1e;
+      --surface-light: #2a2a2a;
+      --text: #e0e0e0;
+      --text-muted: #aaaaaa;
+      --glow: rgba(41, 121, 255, 0.3);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.3);
+      --success: #4caf50;
+      --warning: #ff9800;
+      --error: #f44336;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--surface), var(--surface-light));
+      color: #fff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      background: linear-gradient(45deg, var(--secondary), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+
+    nav a:hover, nav a.active {
+      background: rgba(144, 202, 249, 0.1);
+    }
+
+    nav a i {
+      margin-right: 0.3rem;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Form Styles */
+    .form-container {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+
+    .form-container h2 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--glow);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--glow);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    /* Difficulty Preview */
+    .difficulty-preview {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-left: 0.5rem;
+    }
+
+    .easy { background: #4caf50; }
+    .medium { background: #ff9800; }
+    .hard { background: #f44336; }
+    .insane { background: #9c27b0; }
+    .extreme { background: #2196f3; }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      color: var(--text-muted);
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        display: none;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .form-container {
+        padding: 1rem;
+      }
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--surface-light);
+      color: white;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success { border-left: 4px solid var(--success); }
+    .toast.error { border-left: 4px solid var(--error); }
+    .toast.warning { border-left: 4px solid var(--warning); }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h1>FrGDPS Demon List</h1>
+    <nav id="mainNav">
+      <a href="index.html"><i class="fas fa-list"></i> Demon List</a>
+      <a href="submit.html" class="active"><i class="fas fa-plus-circle"></i> Submit Level</a>
+      <a href="#"><i class="fas fa-info-circle"></i> About</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <h2><i class="fas fa-plus-circle"></i> Submit New Demon</h2>
+      
+      <form id="submitForm">
+        <div class="form-group">
+          <label for="levelName">Level Name <small>(Max 50 characters)</small></label>
+          <input type="text" id="levelName" maxlength="50" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="levelId">Level ID <small>(Optional)</small></label>
+          <input type="number" id="levelId" placeholder="e.g. 1234567">
+        </div>
+        
+        <div class="form-group">
+          <label for="levelCreator">Creator</label>
+          <input type="text" id="levelCreator" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="levelVerifier">Verifier</label>
+          <input type="text" id="levelVerifier" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="levelDifficulty">Difficulty</label>
+          <select id="levelDifficulty" required>
+            <option value="">Select difficulty</option>
+            <option value="easy">Easy Demon</option>
+            <option value="medium">Medium Demon</option>
+            <option value="hard">Hard Demon</option>
+            <option value="insane">Insane Demon</option>
+            <option value="extreme">Extreme Demon</option>
+          </select>
+          <span id="difficultyPreview" class="difficulty-preview hidden"></span>
+        </div>
+        
+        <div class="form-group">
+          <label for="levelVideo">Video Proof URL <small>(YouTube, Streamable, etc.)</small></label>
+          <input type="url" id="levelVideo" placeholder="https://youtube.com/watch?v=..." required>
+        </div>
+        
+        <div class="form-group">
+          <label for="levelNotes">Additional Notes <small>(Optional)</small></label>
+          <textarea id="levelNotes" placeholder="Any special details about the level..."></textarea>
+        </div>
+        
+        <div class="form-group" style="margin-top: 2rem;">
+          <button type="submit" class="btn btn-block">
+            <i class="fas fa-paper-plane"></i> Submit Demon
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <footer>
+    <p>© 2025 Freedom GDPS | Demon List v2.0</p>
+  </footer>
+
+  <script type="module">
+    // Firebase Configuration
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { 
+      getDatabase, 
+      ref, 
+      push, 
+      set 
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDs2sGkNFJJqPOnx1fmeFQcGHXH1yFmPVc",
+      authDomain: "frgdpsdemon.firebaseapp.com",
+      databaseURL: "https://frgdpsdemon-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "frgdpsdemon",
+      storageBucket: "frgdpsdemon.firebasestorage.app",
+      messagingSenderId: "459095738556",
+      appId: "1:459095738556:web:2b73dfa2694b977655e8b9",
+      measurementId: "G-QMQ5G3FQ90"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // DOM Elements
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    const submitForm = document.getElementById('submitForm');
+    const toast = document.getElementById('toast');
+    const difficultySelect = document.getElementById('levelDifficulty');
+    const difficultyPreview = document.getElementById('difficultyPreview');
+
+    // Mobile Menu Toggle
+    mobileMenuBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+
+    // Difficulty Preview
+    difficultySelect.addEventListener('change', (e) => {
+      if (e.target.value) {
+        difficultyPreview.textContent = e.target.value.toUpperCase();
+        difficultyPreview.className = `difficulty-preview ${e.target.value}`;
+        difficultyPreview.classList.remove('hidden');
+      } else {
+        difficultyPreview.classList.add('hidden');
+      }
+    });
+
+    // Show Toast Notification
+    function showToast(message, type = 'success') {
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Validate YouTube URL
+    function isValidVideoUrl(url) {
+      try {
+        const parsed = new URL(url);
+        return ['youtube.com', 'youtu.be', 'streamable.com', 'twitch.tv'].some(domain => 
+          parsed.hostname.includes(domain)
+        );
+      } catch {
+        return false;
+      }
+    }
+
+    // Handle Form Submission
+    submitForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('levelName').value.trim();
+      const creator = document.getElementById('levelCreator').value.trim();
+      const verifier = document.getElementById('levelVerifier').value.trim();
+      const difficulty = document.getElementById('levelDifficulty').value;
+      const video = document.getElementById('levelVideo').value.trim();
+      const levelId = document.getElementById('levelId').value;
+      const notes = document.getElementById('levelNotes').value.trim();
+
+      // Validation
+      if (!name || !creator || !verifier || !difficulty || !video) {
+        showToast('Please fill all required fields', 'error');
+        return;
+      }
+
+      if (name.length > 50) {
+        showToast('Level name too long (max 50 chars)', 'error');
+        return;
+      }
+
+      if (!isValidVideoUrl(video)) {
+        showToast('Please provide a valid video URL (YouTube/Streamable)', 'error');
+        return;
+      }
+
+      try {
+        // Submit to Firebase
+        const newDemonRef = push(ref(db, 'demons'));
+        await set(newDemonRef, {
+          name,
+          creator,
+          verifier,
+          difficulty,
+          video,
+          levelId: levelId || null,
+          notes: notes || null,
+          timestamp: Date.now(),
+          status: 'pending'
+        });
+
+        // Success
+        showToast('Demon submitted for review!', 'success');
+        submitForm.reset();
+        difficultyPreview.classList.add('hidden');
+        
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+
+      } catch (error) {
+        console.error('Submission error:', error);
+        showToast(`Submission failed: ${error.message}`, 'error');
+      }
+    });
+  </script>
+</body>
+</html>
