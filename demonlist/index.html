@@ -5,24 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FrGDPS Demon List</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2979ff;
-      --primary-dark: #1a68e6;
-      --secondary: #90caf9;
-      --accent: #ff4081;
-      --bg: #121212;
-      --surface: #1e1e1e;
-      --surface-light: #2a2a2a;
-      --text: #e0e0e0;
-      --text-muted: #aaaaaa;
-      --glow: rgba(41, 121, 255, 0.3);
-      --radius: 12px;
+      --primary: #ff4754;
+      --primary-dark: #e63e4a;
+      --secondary: #ff7b84;
+      --accent: #ffb74d;
+      --bg: #0f0f12;
+      --surface: #1a1a1f;
+      --surface-light: #24242b;
+      --text: #f0f0f0;
+      --text-muted: #b0b0b0;
+      --glow: rgba(255, 71, 84, 0.3);
+      --radius: 16px;
       --radius-sm: 8px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.3);
+      --shadow: 0 8px 24px rgba(0,0,0,0.4);
       --success: #4caf50;
       --warning: #ff9800;
       --error: #f44336;
+      --easy: #4caf50;
+      --medium: #ff9800;
+      --hard: #f44336;
+      --insane: #9c27b0;
+      --extreme: #2196f3;
     }
 
     * {
@@ -33,7 +39,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: 'Rubik', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -44,22 +50,32 @@
 
     /* Header Styles */
     header {
-      background: linear-gradient(135deg, var(--surface), var(--surface-light));
+      background: var(--surface);
       color: #fff;
       padding: 1.5rem 1rem;
       text-align: center;
-      border-bottom: 3px solid var(--primary);
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      background: linear-gradient(45deg, var(--secondary), #fff);
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      background: linear-gradient(45deg, var(--primary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     /* Navigation */
@@ -67,23 +83,33 @@
       display: flex;
       justify-content: center;
       gap: 1.5rem;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
 
     nav a {
-      color: var(--secondary);
+      color: var(--text-muted);
       text-decoration: none;
       font-weight: 500;
-      padding: 0.3rem 0.5rem;
+      padding: 0.5rem 1rem;
       border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
     }
 
     nav a:hover, nav a.active {
-      background: rgba(144, 202, 249, 0.1);
+      color: var(--text);
+      background: var(--surface-light);
+    }
+
+    nav a.active {
+      color: var(--primary);
     }
 
     nav a i {
-      margin-right: 0.3rem;
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
     }
 
     /* Main Content */
@@ -95,6 +121,23 @@
       width: 100%;
     }
 
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
     /* Table Styles */
     .table-container {
       overflow-x: auto;
@@ -102,25 +145,30 @@
       background: var(--surface);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 600px;
+      min-width: 800px;
     }
 
     th, td {
-      padding: 1rem;
+      padding: 1.2rem 1.5rem;
       text-align: left;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     th {
-      background-color: var(--primary);
-      color: white;
+      background-color: var(--surface-light);
+      color: var(--text);
       position: sticky;
       top: 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
     }
 
     tr:hover {
@@ -129,34 +177,66 @@
 
     .difficulty {
       display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: var(--radius-sm);
-      font-weight: bold;
-      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.75rem;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .easy { background: #4caf50; }
-    .medium { background: #ff9800; }
-    .hard { background: #f44336; }
-    .insane { background: #9c27b0; }
-    .extreme { background: #2196f3; }
+    .easy { background: var(--easy); }
+    .medium { background: var(--medium); color: #333; }
+    .hard { background: var(--hard); }
+    .insane { background: var(--insane); }
+    .extreme { background: var(--extreme); }
+
+    /* Video Button */
+    .video-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-light);
+      color: var(--primary);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+
+    .video-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--glow);
+    }
+
+    .video-btn i {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
 
     /* Form Styles */
     .form-container {
       background: var(--surface);
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       max-width: 600px;
       margin: 2rem auto;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .form-container h2 {
       margin-bottom: 1.5rem;
-      color: var(--secondary);
+      color: var(--text);
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 600;
     }
 
     .form-group {
@@ -166,45 +246,57 @@
     .form-group label {
       display: block;
       margin-bottom: 0.5rem;
-      color: var(--secondary);
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9rem;
     }
 
     .form-group input, .form-group select {
       width: 100%;
-      padding: 0.8rem;
-      background: rgba(255,255,255,0.05);
+      padding: 0.9rem 1rem;
+      background: var(--bg);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius-sm);
       color: var(--text);
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.95rem;
     }
 
     .form-group input:focus, .form-group select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px var(--glow);
+      box-shadow: 0 0 0 3px var(--glow);
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: var(--primary);
       color: white;
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: var(--radius-sm);
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
       text-align: center;
       text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px var(--glow);
+      box-shadow: 0 6px 16px var(--glow);
+    }
+
+    .btn i {
+      margin-right: 0.5rem;
     }
 
     .btn-block {
-      display: block;
+      display: flex;
       width: 100%;
     }
 
@@ -213,9 +305,15 @@
       background: var(--surface);
       color: var(--text-muted);
       text-align: center;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1rem;
       margin-top: auto;
       font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     /* Mobile Menu */
@@ -223,9 +321,49 @@
       display: none;
       background: none;
       border: none;
-      color: var(--secondary);
+      color: var(--text);
       font-size: 1.5rem;
       cursor: pointer;
+      position: absolute;
+      left: 1rem;
+      top: 1.5rem;
+    }
+
+    /* Stats Cards */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card p {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stat-card p span {
+      font-size: 1rem;
+      color: var(--text-muted);
     }
 
     /* Responsive Styles */
@@ -234,6 +372,11 @@
         flex-direction: column;
         gap: 0.5rem;
         display: none;
+        width: 100%;
+        background: var(--surface-light);
+        padding: 1rem;
+        border-radius: var(--radius-sm);
+        margin-top: 1rem;
       }
 
       nav.active {
@@ -244,12 +387,16 @@
         display: block;
       }
 
-      .form-container, .table-container {
-        padding: 1rem;
+      .form-container {
+        padding: 1.5rem;
       }
 
       th, td {
-        padding: 0.8rem 0.5rem;
+        padding: 1rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -268,13 +415,16 @@
       right: 20px;
       background: var(--surface-light);
       color: white;
-      padding: 1rem;
+      padding: 1rem 1.5rem;
       border-radius: var(--radius-sm);
       box-shadow: var(--shadow);
       transform: translateY(100px);
       opacity: 0;
       transition: all 0.3s ease;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      border-left: 4px solid var(--primary);
     }
 
     .toast.show {
@@ -282,29 +432,105 @@
       opacity: 1;
     }
 
-    .toast.success { border-left: 4px solid var(--success); }
-    .toast.error { border-left: 4px solid var(--error); }
-    .toast.warning { border-left: 4px solid var(--warning); }
+    .toast i {
+      margin-right: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .toast.success { border-left-color: var(--success); }
+    .toast.error { border-left-color: var(--error); }
+    .toast.warning { border-left-color: var(--warning); }
+
+    /* Rank Badge */
+    .rank-badge {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--surface-light);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+
+    /* Search Bar */
+    .search-container {
+      margin-bottom: 2rem;
+    }
+
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px;
+      color: var(--text);
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+    }
+
+    .search-bar i {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
   <header>
-    <button class="mobile-menu-btn" id="mobileMenuBtn">
-      <i class="fas fa-bars"></i>
-    </button>
-    <h1>FrGDPS Demon List</h1>
-    <nav id="mainNav">
-      <a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a>
-      <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
-      <a href="#"><i class="fas fa-info-circle"></i> About</a>
-    </nav>
+    <div class="header-container">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h1>FrGDPS Demon List</h1>
+      <nav id="mainNav">
+        <a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a>
+        <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
+        <a href="#"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#"><i class="fas fa-trophy"></i> Leaderboard</a>
+      </nav>
+    </div>
   </header>
 
   <main>
     <section id="listPage">
-      <div class="text-center">
-        <h2>Official FrGDPS Demon List</h2>
-        <p>Ranking of the hardest levels in Freedom GDPS</p>
+      <div class="page-header">
+        <h2>FrGDPS Demon List</h2>
+        <p>The hardest levels in Freedom GDPS, ranked by difficulty</p>
+      </div>
+
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3>Total Demons</h3>
+          <p id="totalDemons">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Extreme Demons</h3>
+          <p id="extremeDemons">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Last Updated</h3>
+          <p id="lastUpdated">-<span></span></p>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search demons...">
+        </div>
       </div>
 
       <div class="table-container">
@@ -316,7 +542,7 @@
               <th>Difficulty</th>
               <th>Creator</th>
               <th>Verifier</th>
-              <th>Video</th>
+              <th>Video Proof</th>
             </tr>
           </thead>
           <tbody id="demonTableBody">
@@ -334,17 +560,17 @@
         <form id="submitForm">
           <div class="form-group">
             <label for="levelName">Level Name</label>
-            <input type="text" id="levelName" required>
+            <input type="text" id="levelName" required placeholder="Enter level name">
           </div>
           
           <div class="form-group">
             <label for="levelCreator">Creator</label>
-            <input type="text" id="levelCreator" required>
+            <input type="text" id="levelCreator" required placeholder="Enter creator name">
           </div>
           
           <div class="form-group">
             <label for="levelVerifier">Verifier</label>
-            <input type="text" id="levelVerifier" required>
+            <input type="text" id="levelVerifier" required placeholder="Enter verifier name">
           </div>
           
           <div class="form-group">
@@ -361,7 +587,7 @@
           
           <div class="form-group">
             <label for="levelVideo">Video URL</label>
-            <input type="url" id="levelVideo" required>
+            <input type="url" id="levelVideo" required placeholder="Enter YouTube or video link">
           </div>
           
           <button type="submit" class="btn btn-block">
@@ -372,11 +598,17 @@
     </section>
   </main>
 
-  <div id="toast" class="toast"></div>
-
   <footer>
-    <p>© 2025 Freedom GDPS | Demon List v2.0</p>
+    <div class="footer-container">
+      <p>© 2025 FrGDPS Demon List | All Rights Reserved</p>
+      <p class="mt-2">Not affiliated with Geometry Dash or RobTop Games</p>
+    </div>
   </footer>
+
+  <div id="toast" class="toast">
+    <i class="fas fa-check-circle"></i>
+    <span class="toast-message">Success message here</span>
+  </div>
 
   <script type="module">
     // Firebase Configuration
@@ -413,8 +645,13 @@
     const demonTableBody = document.getElementById('demonTableBody');
     const submitForm = document.getElementById('submitForm');
     const toast = document.getElementById('toast');
+    const toastMessage = document.querySelector('.toast-message');
     const listPage = document.getElementById('listPage');
     const submitPage = document.getElementById('submitPage');
+    const searchInput = document.getElementById('searchInput');
+    const totalDemonsEl = document.getElementById('totalDemons');
+    const extremeDemonsEl = document.getElementById('extremeDemons');
+    const lastUpdatedEl = document.getElementById('lastUpdated');
 
     // Mobile Menu Toggle
     mobileMenuBtn.addEventListener('click', () => {
@@ -423,12 +660,27 @@
 
     // Show Toast Notification
     function showToast(message, type = 'success') {
-      toast.textContent = message;
+      const icon = type === 'success' ? 'fa-check-circle' : 
+                  type === 'error' ? 'fa-times-circle' : 'fa-exclamation-circle';
+      
+      toast.innerHTML = `<i class="fas ${icon}"></i><span class="toast-message">${message}</span>`;
       toast.className = `toast ${type} show`;
       
       setTimeout(() => {
         toast.classList.remove('show');
       }, 3000);
+    }
+
+    // Format date
+    function formatDate(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
     }
 
     // Load Demon List
@@ -441,17 +693,46 @@
         
         if (data) {
           let index = 1;
-          Object.entries(data).reverse().forEach(([key, demon]) => {
+          let extremeCount = 0;
+          const demons = Object.entries(data).reverse();
+          
+          demons.forEach(([key, demon]) => {
+            if (demon.difficulty === 'extreme') extremeCount++;
+            
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td>${index++}</td>
+              <td><span class="rank-badge">${index}</span></td>
               <td>${demon.name}</td>
               <td><span class="difficulty ${demon.difficulty || 'hard'}">${demon.difficulty || 'Hard'}</span></td>
               <td>${demon.creator}</td>
               <td>${demon.verifier}</td>
-              <td><a href="${demon.video}" target="_blank" class="btn"><i class="fas fa-video"></i> Watch</a></td>
+              <td><a href="${demon.video}" target="_blank" class="video-btn"><i class="fas fa-video"></i> Watch</a></td>
             `;
             demonTableBody.appendChild(tr);
+            index++;
+          });
+          
+          // Update stats
+          totalDemonsEl.textContent = demons.length;
+          extremeDemonsEl.textContent = extremeCount;
+          lastUpdatedEl.textContent = formatDate(Date.now());
+          
+          // Add search functionality
+          searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = demonTableBody.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+              const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+              const creator = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+              const verifier = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+              
+              if (name.includes(searchTerm) || creator.includes(searchTerm) || verifier.includes(searchTerm)) {
+                row.style.display = '';
+              } else {
+                row.style.display = 'none';
+              }
+            });
           });
         } else {
           demonTableBody.innerHTML = `
@@ -503,6 +784,14 @@
         listPage.classList.add('hidden');
         submitPage.classList.remove('hidden');
         document.title = 'Submit Demon - FrGDPS';
+        
+        // Update active nav link
+        document.querySelectorAll('nav a').forEach(link => {
+          link.classList.remove('active');
+          if (link.querySelector('.fa-plus-circle')) {
+            link.classList.add('active');
+          }
+        });
       } else {
         loadDemonList();
       }
