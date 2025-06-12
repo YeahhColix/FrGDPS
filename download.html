@@ -10,12 +10,12 @@
     <style>
         :root {
             --primary: #6A5ACD;       /* Slate blue - striking but soft */
-    --secondary: #48D1CC;     /* Medium turquoise - vibrant contrast */
-    --accent: #9370DB;        /* Medium purple - elegant pop */
-    --dark: #0F0F1A;          /* Deep space black with blue undertone */
-    --light: #E6E6FA;         /* Lavender - soft light text */
-    --card-bg: #1E1E2E;       /* Dark space gray with purple tint */
-}
+            --secondary: #48D1CC;     /* Medium turquoise - vibrant contrast */
+            --accent: #9370DB;        /* Medium purple - elegant pop */
+            --dark: #0F0F1A;          /* Deep space black with blue undertone */
+            --light: #E6E6FA;         /* Lavender - soft light text */
+            --card-bg: #1E1E2E;       /* Dark space gray with purple tint */
+        }
         
         * {
             margin: 0;
@@ -165,35 +165,42 @@
             color: white;
         }
         
-        /* Credits Section */
-        .credits-container {
+        /* Download Cards Section */
+        .downloads-container {
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .credit-card {
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .download-card {
             background-color: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid #4fc3f7;
+            border: 1px solid rgba(79, 195, 247, 0.3);
         }
         
-        .credit-card:hover {
+        .download-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent);
         }
         
-        .credit-card::before {
+        .download-card::before {
             content: "";
             position: absolute;
             top: 0;
@@ -203,40 +210,74 @@
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
-        .credit-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
+        .download-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .credit-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: white;
+        .download-card:hover::after {
+            opacity: 0.3;
         }
         
-        .credit-card p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            color: #DDD;
+        .download-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
         }
         
-        .role {
+        .download-card:hover .download-icon {
+            transform: scale(1.2);
+        }
+        
+        .download-card .role {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 5px 15px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .view-btn {
+        .download-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .download-card h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .download-card p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #DDD;
+            flex-grow: 1;
+        }
+        
+        .download-btn {
             background-color: var(--accent);
             color: var(--dark);
             border: none;
@@ -249,13 +290,45 @@
             align-items: center;
             gap: 8px;
             font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(255,209,102,0.3);
+            box-shadow: 0 4px 10px rgba(148, 112, 219, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .view-btn:hover {
+        .download-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .download-btn:hover {
             background-color: white;
             transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(255,209,102,0.4);
+            box-shadow: 0 7px 15px rgba(148, 112, 219, 0.5);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
+        }
+        
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #AAA;
+        }
+        
+        .file-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         /* Footer */
@@ -348,20 +421,12 @@
                 font-size: 0.95rem;
             }
             
-            .credit-card {
+            .download-card {
                 padding: 20px;
             }
-        }
-        
-        @media (min-width: 992px) {
-            .credits-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
             
-            .credit-card {
-                margin-bottom: 0;
+            .download-grid {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -394,6 +459,31 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.3); }
         }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--light);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -418,78 +508,126 @@
     <section class="hero">
         <!-- Floating decorative elements -->
         <div class="floating" style="font-size: 2rem;">✨</div>
-        <div class="floating" style="font-size: 1.5rem;">🎮</div>
+        <div class="floating" style="font-size: 1.5rem;">📥</div>
         <div class="floating" style="font-size: 2rem;">⭐</div>
         
         <div style="display: flex; justify-content: center;">
-    <img src="https://i.postimg.cc/YkpKWdCF/20250608-182638.jpg" class="icon" alt="FreedomGDPS Icon" width="100" height="100" style="margin-bottom: 5px;">
-</div>
+            <img src="https://i.postimg.cc/YkpKWdCF/20250608-182638.jpg" class="icon" alt="FreedomGDPS Icon" width="100" height="100" style="margin-bottom: 5px;">
+        </div>
         <h2>Download Page!</h2>
         <p>A Place Where You Can Store Files That You Definitely Have To Download</p>
     </section>
 
-    <div class="credits-container">
-        <!-- Credit Card 1 -->
-        <div class="credit-card">
-            <span class="role">Game</span>
-            <h3>FrGDPS 2.2 APK</h3>
-            <p>The Main App, You Can Use FrGeode For Additional Features.</p>
-            <a href="https://loadly.io/freedomgd">
-                <button class="view-btn">
-                    <i class="fas fa-external-link-alt"></i> Download
-                </button>
-            </a>
+    <div class="downloads-container">
+        <div class="section-title">
+            <h2>Available Downloads</h2>
         </div>
-
-        <div class="credits-container">
-        <!-- Credit Card 1 -->
-        <div class="credit-card">
-            <span class="role">Game</span>
-            <h3>FrGDPS Sec</h3>
-            <p>The Main Sec App, Make Sure To Use FrGeode If You Wanna Play it.</p>
-            <a href="https://d.apkpure.com/b/APK/com.flessing.freedomgdps?version=latest">
-                <button class="view-btn">
-                    <i class="fas fa-external-link-alt"></i> Download
-                </button>
-            </a>
-        </div>
-
-            <div class="credit-card">
-            <span class="role">PC Download</span>
-            <h3>FrGDPS</h3>
-            <p>FrGDPS For PC, You Can Install It Directly</p>
-            <a href="https://p-def4.pcloud.com/cBZBcxzucZSu8h4s7Zqkpg7ZZeyEjVkZ2ZZklpZkZJscvhZ3LZ9QZ54ZIQZAzZCHZq8ZP4ZozZxRZa4ZBYZcQZv8ZRVOj5ZvJOc2FfGvVm8IAOghdt3epO6muNX/FrGDPS%20%28PC%29.zip">
-                <button class="view-btn">
-                    <i class="fab fa-github"></i> Download
-                </button>
-            </a>
+        
+        <div class="download-grid">
+            <!-- Main App -->
+            <div class="download-card">
+                <i class="fas fa-mobile-alt download-icon"></i>
+                <span class="role">Primary App</span>
+                <h3>FrGDPS 2.2 APK</h3>
+                <p>The main application for FreedomGDPS. Includes all core features and levels. Use FrGeode for additional modding capabilities.</p>
+                <a href="https://loadly.io/freedomgd">
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i> Get It Now
+                    </button>
+                </a>
+                <div class="file-info">
+                    <span><i class="fas fa-file"></i> APK</span>
+                    <span><i class="fas fa-sd-card"></i> ~185MB</span>
+                </div>
             </div>
-        <!-- Credit Card 2 -->
-        <div class="credit-card">
-            <span class="role">Launcher</span>
-            <h3>FrGeode</h3>
-            <p>A Launcher For FrGDPS, This Is Geode But Its An Older Version</p>
-            <a href="https://objects.githubusercontent.com/github-production-release-asset-2e65be/968607170/8cbdb12c-2bab-449d-9429-5b0012b01338?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250603T135056Z&X-Amz-Expires=300&X-Amz-Signature=76d3aa369c093ac89b2d85d3afe2e11216c03ff1da44631def3e1d704a40746f&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DFrGeode.apk&response-content-type=application%2Fvnd.android.package-archive">
-                <button class="view-btn">
-                    <i class="fab fa-github"></i> Download
+            
+            <!-- Security App -->
+            <div class="download-card">
+                <i class="fas fa-shield-alt download-icon"></i>
+                <span class="role">Security Version</span>
+                <h3>FrGDPS Sec</h3>
+                <p>The secured version of FreedomGDPS. Enhanced protection with all the same great features. Requires FrGeode to play.</p>
+                <a href="https://apkpure.com/p/com.flessing.freedomgdps">
+                    <button class="download-btn">
+                        <i class="fas fa-lock"></i> Secure Download
+                    </button>
+                </a>
+                <div class="file-info">
+                    <span><i class="fas fa-file"></i> APK</span>
+                    <span><i class="fas fa-sd-card"></i> ~185MB</span>
+                </div>
+            </div>
+            
+            <!-- PC Version -->
+            <div class="download-card">
+                <i class="fas fa-desktop download-icon"></i>
+                <span class="role">Desktop Edition</span>
+                <h3>FrGDPS PC</h3>
+                <p>Full desktop version for Windows. No emulator needed - install and play directly on your computer.</p>
+                <a href="https://p-def4.pcloud.com/cBZBcxzucZSu8h4s7Zqkpg7ZZeyEjVkZ2ZZklpZkZJscvhZ3LZ9QZ54ZIQZAzZCHZq8ZP4ZozZxRZa4ZBYZcQZv8ZRVOj5ZvJOc2FfGvVm8IAOghdt3epO6muNX/FrGDPS%20%28PC%29.zip">
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i> PC Download
+                    </button>
+                </a>
+                <div class="file-info">
+                    <span><i class="fas fa-file-archive"></i> ZIP</span>
+                    <span><i class="fas fa-hdd"></i> ~250MB</span>
+                </div>
+            </div>
+            
+            <!-- Launcher -->
+            <div class="download-card">
+                <i class="fas fa-rocket download-icon"></i>
+                <span class="role">Mod Launcher</span>
+                <h3>FrGeode</h3>
+                <p>Essential launcher for FreedomGDPS. Enables mods, custom textures, and advanced features.</p>
+                <a href="https://objects.githubusercontent.com/github-production-release-asset-2e65be/968607170/8cbdb12c-2bab-449d-9429-5b0012b01338?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20250612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250612T142859Z&X-Amz-Expires=300&X-Amz-Signature=e048ebd7654e8a4786889083312d280372c9667b293fbb4a99aa93fda1589b13&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DFrGeode.apk&response-content-type=application%2Fvnd.android.package-archive">
+                    <button class="download-btn">
+                        <i class="fas fa-cogs"></i> Get Launcher
+                    </button>
+                </a>
+                <div class="file-info">
+                    <span><i class="fas fa-file"></i> APK</span>
+                    <span><i class="fas fa-sd-card"></i> ~5MB</span>
+                </div>
+            </div>
+            
+            <!-- UI Mod -->
+            <div class="download-card">
+                <i class="fas fa-paint-brush download-icon"></i>
+                <span class="role">UI Enhancement</span>
+                <h3>Freedom UI</h3>
+                <p>Custom interface mod for Geode. Transforms the look and feel of your GDPS experience.</p>
+                <a href="https://raw.githubusercontent.com/ThDev2/FrGDPS/refs/heads/main/packs/FreeUI.zip">
+                    <button class="download-btn">
+                        <i class="fas fa-palette"></i> Download UI
+                    </button>
+                </a>
+                <div class="file-info">
+                    <span><i class="fas fa-file-archive"></i> ZIP</span>
+                    <span><i class="fas fa-sd-card"></i> ~2MB</span>
+                </div>
+            </div>
+            
+            <!-- Bonus Card -->
+            <div class="download-card">
+                <i class="fas fa-star download-icon"></i>
+                <span class="role">Bonus Content</span>
+                <h3>More Coming Soon!</h3>
+                <p>We're constantly adding new content. Check back regularly for updates, mods, and special releases!</p>
+                <button class="download-btn" style="background-color: var(--secondary);">
+                    <i class="fas fa-bell"></i> Stay Tuned
                 </button>
-            </a>
-        </div>        
-        <!-- Credit Card 5 -->
-        <div class="credit-card">
-            <span class="role">FreeUI</span>
-            <h3>Freedom UI</h3>
-            <p>A UI Mod For Geode Mod</p>
-            <a href="https://raw.githubusercontent.com/ThDev2/FrGDPS/refs/heads/main/packs/FreeUI.zip">
-                <button class="view-btn">
-                    <i class="fas fa-github"></i> Download
-                </button>
-            </a>
+                <div class="file-info">
+                    <span><i class="fas fa-clock"></i> Coming Soon</span>
+                    <span><i class="fas fa-heart"></i> Surprise!</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>Made with <span class="heart">muwani</span> | All Rights Reserved | <a href="#"><span>FrGDPS 2025</span></a></p>
+        <p>Made with <span class="heart">❤️</span> by the FreedomGDPS Team | All Rights Reserved | <a href="#"><span>FrGDPS 2025</span></a></p>
     </footer>
 
     <script>
@@ -519,6 +657,25 @@
         
         // Run after page loads
         window.addEventListener('load', addSparkles);
+        
+        // Add ripple effect to download buttons
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
+        });
     </script>
 </body>
 </html>
