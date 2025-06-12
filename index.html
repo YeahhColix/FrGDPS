@@ -1,375 +1,156 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta name="google-site-verification" content="ma9ixtL04ZaSWjvOhxWdfkyeqDctJDTlz8WM6bIMzG0" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="FreedomGDPS!!11 - Geometry Dash Private Server Buatan Orang Indonesia yang paling bebas!"/>
-  <meta name="keywords" content="FreedomGDPS, GDPS, Geometry Dash Server, GDPS Indonesia, fgdps, rgdps, FreedomGDPS!!, efgedepees, Fgdps, Freedom GDPS"/>
-  <meta name="author" content="Fless"/>
-  <meta name="robots" content="index, follow">
-  <title>FreedomGDPS!!11 - Server Geometry Dash Paling Bebas</title>
-
-  <link rel="manifest" href="/manifest.json">
-  <meta name="application-name" content="FreedomGDPS!!11">
-  <meta name="theme-color" content="#12121a">
-  <meta name="msapplication-TileColor" content="#121212">
-  <meta name="msapplication-TileImage" content="https://fless.ps.fhgdps.com/dashboard/icon.png">
-  <link rel="icon" type="image/png" href="https://fless.ps.fhgdps.com/dashboard/icon.png"/>
-  <link rel="canonical" href="https://fless.netlify.app/"/>
-
-  <meta property="og:title" content="FreedomGDPS!!11 - GDPS Paling Bebas"/>
-  <meta property="og:description" content="Geometry Dash Private Server Buatan Orang Indonesia."/>
-  <meta property="og:url" content="https://fless.netlify.app/"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image" content="https://fless.ps.fhgdps.com/dashboard/icon.png"/>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://fless.netlify.app",
-    "name": "FreedomGDPS!!11",
-    "author": {"@type": "Person","name": "Fless"},
-    "description": "Geometry Dash Private Server Paling Bebas.",
-    "inLanguage": "id"
-  }
-  </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FreedomGDPS!!11 - Geometry Dash Private Server paling bebas dari Indonesia." />
+  <title>FreedomGDPS!!11</title>
+  <link rel="icon" href="https://fless.ps.fhgdps.com/dashboard/icon.png" />
+  <link rel="manifest" href="/manifest.json" />
   <style>
+    /* — VARIABLES & RESET — */
     :root {
       --primary: #ff6b6b;
       --secondary: #4ecdc4;
-      --dark: #12121a;
-      --dark-light: #1e1e2a;
-      --light: #e0e0e0;
-      --accent: #ff9e64;
-      --glow: 0 0 15px rgba(255, 107, 107, 0.5);
+      --dark: #0d0d11;
+      --dark-alt: #1a1a22;
+      --light: #eaeaea;
+      --glow: 0 0 15px rgba(255, 107, 107, 0.4);
+      --radius: 12px;
+      --transition: 0.3s ease;
+      font-size: clamp(14px, 1.2vw, 18px);
     }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    @font-face {
-      font-family: 'Pusab';
-      src: url('assets/Pusab.ttf') format('truetype');
-      font-display: swap;
-    }
-    
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Pusab', sans-serif;
+      font-family: system-ui, Helvetica, sans-serif;
       background: var(--dark);
       color: var(--light);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      padding: 2rem 1rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:1rem;
+      min-height:100vh;
     }
-    
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.15) 0%, transparent 20%),
-        radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.15) 0%, transparent 20%);
-      z-index: -1;
-      pointer-events: none;
-    }
-    
-    .particle {
-      position: fixed;
-      background: var(--primary);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: -1;
-      animation: float 15s infinite linear;
-    }
-    
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-    
-    .header {
-      margin-bottom: 3rem;
-      position: relative;
-      z-index: 1;
-    }
-    
+    h1, p, nav, footer { width:100%; max-width:900px; }
+
+    /* — HEADER — */
+    header { text-align:center; margin:2rem 0; }
     .title {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: var(--glow);
-      animation: pulse 2s ease-in-out infinite alternate;
-      position: relative;
-      display: inline-block;
+      animation: glow 2s alternate infinite;
     }
-    
-    @keyframes pulse {
-      0% {
-        text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-      }
-      100% {
-        text-shadow: 0 0 20px rgba(255, 107, 107, 0.8), 0 0 30px rgba(78, 205, 196, 0.5);
-      }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px var(--primary); }
+      to { text-shadow: 0 0 25px var(--secondary); }
     }
-    
     .subtitle {
-      font-size: 1.2rem;
+      margin-top:0.5rem;
       color: var(--secondary);
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
     }
-    
-    .subtitle::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 3px;
-    }
-    
-    .nav {
+
+    /* — NAVIGATION GRID — */
+    nav {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap:1rem;
+      margin-bottom:2rem;
     }
-    
-    .nav a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem 1rem;
-      border-radius: 12px;
-      background: var(--dark-light);
+    nav a {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:1rem;
+      border-radius: var(--radius);
+      background: var(--dark-alt);
       color: var(--light);
-      text-decoration: none;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-weight: bold;
-      text-align: center;
-      min-height: 80px;
+      text-decoration:none;
+      font-weight:600;
+      transition: var(--transition);
+      border:1px solid #333;
     }
-    
-    .nav a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: 0.5s;
-    }
-    
-    .nav a:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    nav a:hover {
       background: var(--primary);
-      color: var(--dark);
-    }
-    
-    .nav a:hover::before {
-      left: 100%;
-    }
-    
-    .content-section {
-      max-width: 800px;
-      margin: 3rem auto;
-      position: relative;
-    }
-    
-    .music-player {
-      width: 100%;
-      max-width: 600px;
-      margin: 2rem auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-    
-    .music-player:hover {
-      transform: scale(1.02);
-    }
-    
-    .discord-widget {
-      width: 100%;
-      max-width: 800px;
-      margin: 2rem auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-    
-    .discord-widget:hover {
-      transform: scale(1.01);
-    }
-    
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--primary), var(--accent));
-      color: var(--dark);
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: bold;
-      margin: 1rem 0;
-      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .cta-button:hover {
+      color: #000;
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.5);
-      background: linear-gradient(45deg, var(--accent), var(--primary));
     }
-    
-    .cta-button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transform: translateX(-100%);
-      transition: 0.5s;
+
+    /* — IFRAMES & BUTTON — */
+    .media, .cta, footer {
+      width:100%;
+      max-width:900px;
+      margin:1rem 0;
+      text-align:center;
     }
-    
-    .cta-button:hover::after {
-      transform: translateX(100%);
+    iframe {
+      width:100%;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    
+    .cta-button {
+      display:inline-block;
+      padding:1rem 2rem;
+      margin:1rem 0;
+      border:none;
+      border-radius:50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      font-weight:bold;
+      letter-spacing:1px;
+      text-decoration:none;
+      box-shadow: var(--glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255,107,107,0.6);
+    }
+
+    /* — FOOTER — */
     footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
+      margin-top:auto;
+      padding:1rem;
+      font-size:0.9rem;
       color: var(--secondary);
-      text-align: center;
-      padding: 1.5rem;
-      position: relative;
-    }
-    
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--secondary), transparent);
-    }
-    
-    @media (max-width: 768px) {
-      .title {
-        font-size: 2.2rem;
-      }
-      
-      .subtitle {
-        font-size: 1rem;
-      }
-      
-      .nav {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1rem;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="header">
+
+  <header>
     <h1 class="title">FreedomGDPS!!11</h1>
     <p class="subtitle">Freedom means being free to do ;3</p>
-  </div>
+  </header>
 
-  <div class="nav">
-    <a href="https://fless.ps.fhgdps.com">
-      <span>Main Page</span>
-    </a>
-    <a href="/download.html">
-      <span>Download</span>
-    </a>
-    <a href="/tools.html">
-      <span>Tools</span>
-    </a>
-    <a href="/rate.html">
-      <span>Rating System</span>
-    </a>
-    <a href="https://frgd.ps.fhgdps.com/gauntlet/">
-      <span>Gauntlet</span>
-    </a>
-    <a href="/social.html">
-      <span>Social</span>
-    </a>
-    <a href="https://frgd.ps.fhgdps.com/">
-      <span>Statistics</span>
-    </a>
-    <a href="/credit.html">
-      <span>Credits</span>
-    </a>
-    <a href="/privacy.html">
-      <span>Privacy Policy</span>
-    </a>
-  </div>
+  <nav>
+    <a href="https://fless.ps.fhgdps.com">Main Page</a>
+    <a href="/download.html">Download</a>
+    <a href="/tools.html">Tools</a>
+    <a href="/rate.html">Rating System</a>
+    <a href="https://frgd.ps.fhgdps.com/gauntlet/">Gauntlet</a>
+    <a href="/social.html">Social</a>
+    <a href="https://frgd.ps.fhgdps.com/">Statistics</a>
+    <a href="/credit.html">Credits</a>
+    <a href="/privacy.html">Privacy Policy</a>
+  </nav>
 
-  <div class="content-section">
-    <iframe 
-      class="music-player"
-      width="100%" 
-      height="166" 
-      scrolling="no" 
-      frameborder="no" 
-      allow="autoplay" 
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%23ff6b6b&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+  <div class="media">
+    <iframe height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2101307064&color=%23ff6b6b&auto_play=true">
     </iframe>
   </div>
 
-  <div class="content-section" style="text-align: center;">
+  <div class="cta">
     <a href="https://discord.gg/YyeZ2Sxjgf" class="cta-button">Join Our Discord!</a>
   </div>
 
-  <div class="content-section">
-    <iframe 
-      class="discord-widget"
-      src="https://discord.com/widget?id=876754832113958912&theme=dark" 
-      width="100%" 
-      height="500" 
-      loading="lazy">
+  <div class="media">
+    <iframe height="450" loading="lazy"
+      src="https://discord.com/widget?id=876754832113958912&theme=dark">
     </iframe>
   </div>
 
@@ -378,55 +159,8 @@
   </footer>
 
   <script>
-    // Dynamic Year
-    document.getElementById("year").textContent = new Date().getFullYear();
-    
-    // Create floating particles
-    function createParticles() {
-      const colors = ['#ff6b6b', '#4ecdc4', '#ff9e64', '#58a6ff'];
-      const count = 15;
-      
-      for (let i = 0; i < count; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        // Random properties
-        const size = Math.random() * 10 + 5;
-        const posX = Math.random() * window.innerWidth;
-        const posY = Math.random() * window.innerHeight + window.innerHeight;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 10;
-        
-        // Apply styles
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${posX}px`;
-        particle.style.top = `${posY}px`;
-        particle.style.background = color;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
-        
-        document.body.appendChild(particle);
-        
-        // Remove particle after animation completes
-        setTimeout(() => {
-          particle.remove();
-        }, duration * 1000);
-      }
-    }
-    
-    // Initial particles
-    createParticles();
-    
-    // Create new particles periodically
-    setInterval(createParticles, 3000);
-    
-    // Add hover effect to nav items
-    const navItems = document.querySelectorAll('.nav a');
-    navItems.forEach((item, index) => {
-      item.style.transitionDelay = `${index * 0.05}s`;
-    });
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
