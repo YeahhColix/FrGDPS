@@ -7,6 +7,8 @@
   <title>FreedomGDPS!!11</title>
   <link rel="icon" href="https://fless.ps.fhgdps.com/dashboard/icon.png" />
   <link rel="manifest" href="/manifest.json" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* — VARIABLES & RESET — */
     :root {
@@ -67,17 +69,11 @@
       margin-bottom: 1rem;
     }
 
-    .logo {
-      width: 80px;
-      height: 80px;
-      background: var(--dark-alt);
+    .icon {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
+      object-fit: cover;
       border: 2px solid var(--secondary);
       box-shadow: var(--shadow);
     }
@@ -281,16 +277,6 @@
       color: var(--accent);
     }
 
-    /* — ICONS — */
-    .icon {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      stroke-width: 0;
-      stroke: currentColor;
-      fill: currentColor;
-    }
-
     /* — RESPONSIVE ADJUSTMENTS — */
     @media (max-width: 768px) {
       nav {
@@ -317,7 +303,7 @@
   <div class="container">
     <header>
       <div class="logo-container">
-        <div class="logo">F</div>
+        <img src="https://i.postimg.cc/3RxnVdxD/20250608-182650.jpg" class="icon" alt="FreedomGDPS Icon" width="100" height="100" style="margin-bottom: 5px;">
       </div>
       <h1 class="title">FreedomGDPS!!11</h1>
       <p class="subtitle">The most flexible Geometry Dash private server from Indonesia. Freedom means being free to do ;3</p>
@@ -325,40 +311,40 @@
 
     <nav>
       <a href="https://fless.ps.fhgdps.com">
-        <i>🏠</i> Main Page
+        <i class="fas fa-home"></i> Main Page
       </a>
       <a href="/download.html">
-        <i>📥</i> Download
+        <i class="fas fa-download"></i> Download
       </a>
       <a href="/tools.html">
-        <i>🔧</i> Tools
+        <i class="fas fa-tools"></i> Tools
       </a>
       <a href="/rate.html">
-        <i>⭐</i> Rating System
+        <i class="fas fa-star"></i> Rating System
       </a>
       <a href="https://frgd.ps.fhgdps.com/gauntlet/">
-        <i>🏆</i> Gauntlet
+        <i class="fas fa-trophy"></i> Gauntlet
       </a>
       <a href="/demonlist">
-        <i>😈</i> Demonlist
+        <i class="fas fa-skull"></i> Demonlist
       </a>
       <a href="/social.html">
-        <i>👥</i> Social
+        <i class="fas fa-users"></i> Social
       </a>
       <a href="https://ameliaptz.141412.xyz/">
-        <i>📊</i> Statistics
+        <i class="fas fa-chart-bar"></i> Statistics
       </a>
       <a href="/credit.html">
-        <i>👏</i> Credits
+        <i class="fas fa-hands-helping"></i> Credits
       </a>
       <a href="/privacy.html">
-        <i>🔒</i> Privacy Policy
+        <i class="fas fa-lock"></i> Privacy Policy
       </a>
     </nav>
 
     <div class="card">
       <div class="card-header">
-        <i>🎵</i>
+        <i class="fas fa-music"></i>
         <h2 class="card-title">Featured Track</h2>
       </div>
       <div class="card-content">
@@ -372,13 +358,13 @@
 
     <div class="cta" style="text-align: center;">
       <a href="https://discord.gg/YyeZ2Sxjgf" class="cta-button">
-        <i>🎮</i> Join Our Discord Community
+        <i class="fab fa-discord"></i> Join Our Discord Community
       </a>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <i>💬</i>
+        <i class="fas fa-comments"></i>
         <h2 class="card-title">Community Hub</h2>
       </div>
       <div class="card-content">
@@ -392,17 +378,17 @@
 
     <div class="features">
       <div class="feature">
-        <i>🚀</i>
+        <i class="fas fa-rocket"></i>
         <h3>Enhanced Performance</h3>
         <p>Our server delivers smooth gameplay with optimized performance even on lower-end devices.</p>
       </div>
       <div class="feature">
-        <i>🎨</i>
+        <i class="fas fa-paint-brush"></i>
         <h3>Creative Freedom</h3>
         <p>Unlock new creative possibilities with our expanded editor tools and features.</p>
       </div>
       <div class="feature">
-        <i>🌐</i>
+        <i class="fas fa-globe"></i>
         <h3>Active Community</h3>
         <p>Join thousands of players in our vibrant, supportive Indonesian gaming community.</p>
       </div>
@@ -412,10 +398,10 @@
   <footer>
     <p>Website by Fless • FreedomGDPS!!11 &copy; <span id="year"></span></p>
     <div class="footer-links">
-      <a href="/terms">Terms of Service</a>
-      <a href="/faq">FAQ</a>
-      <a href="/contact">Contact</a>
-      <a href="/status">Server Status</a>
+      <a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a>
+      <a href="/faq"><i class="fas fa-question-circle"></i> FAQ</a>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="/status"><i class="fas fa-server"></i> Server Status</a>
     </div>
   </footer>
 
