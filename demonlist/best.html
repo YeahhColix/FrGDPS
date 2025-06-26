@@ -386,26 +386,6 @@
     .pagination button:hover:not(.active) {
       background: var(--surface);
     }
-
-    /* Loading Animation */
-    .loading {
-      display: flex;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,255,255,0.1);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
   </style>
 </head>
 <body>
@@ -417,7 +397,7 @@
       <h1>FrGDPS Demonlist</h1>
       <nav id="mainNav">
         <a href="index.html"><i class="fas fa-list"></i> Demon List</a>
-        <a href="https://forms.gle/DNvnJwDPtNNpsfUd8"><i class="fas fa-plus-circle"></i> Submit Level</a>
+        <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
         <a href="info.html"><i class="fas fa-info-circle"></i> About</a>
         <a href="best.html" class="active"><i class="fas fa-trophy"></i> Leaderboard</a>
       </nav>
@@ -434,11 +414,7 @@
         </div>
       </div>
 
-      <div class="loading" id="loadingIndicator">
-        <div class="loading-spinner"></div>
-      </div>
-
-      <table class="leaderboard-table" id="leaderboardTable">
+      <table class="leaderboard-table">
         <thead>
           <tr>
             <th style="width: 60px;">#</th>
@@ -449,20 +425,208 @@
             <th>Last Record</th>
           </tr>
         </thead>
-        <tbody id="leaderboardBody">
-          <!-- Player data will be inserted here by JavaScript -->
+        <tbody>
+          <!-- Player 1 -->
+          <tr>
+            <td class="player-rank">1</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/123456" alt="Player1" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">Player1</span>
+              </div>
+            </td>
+            <td>78</td>
+            <td>2450</td>
+            <td>120</td>
+            <td>
+              <span class="player-difficulty extreme">Bloodbath</span>
+            </td>
+          </tr>
+          
+          <!-- Player 2 -->
+          <tr>
+            <td class="player-rank">2</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/654321" alt="GDPro" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">GDPro</span>
+              </div>
+            </td>
+            <td>65</td>
+            <td>2100</td>
+            <td>95</td>
+            <td>
+              <span class="player-difficulty extreme">Sakupen Circles</span>
+            </td>
+          </tr>
+          
+          <!-- Player 3 -->
+          <tr>
+            <td class="player-rank">3</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/789012" alt="DemonSlayer" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">DemonSlayer</span>
+              </div>
+            </td>
+            <td>58</td>
+            <td>1875</td>
+            <td>80</td>
+            <td>
+              <span class="player-difficulty extreme">Acu</span>
+            </td>
+          </tr>
+          
+          <!-- Player 4 -->
+          <tr>
+            <td class="player-rank">4</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/345678" alt="JumpKing" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">JumpKing</span>
+              </div>
+            </td>
+            <td>52</td>
+            <td>1650</td>
+            <td>75</td>
+            <td>
+              <span class="player-difficulty insane">Artificial Ascent</span>
+            </td>
+          </tr>
+          
+          <!-- Player 5 -->
+          <tr>
+            <td class="player-rank">5</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/901234" alt="CubeMaster" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">CubeMaster</span>
+              </div>
+            </td>
+            <td>48</td>
+            <td>1420</td>
+            <td>65</td>
+            <td>
+              <span class="player-difficulty hard">Nine Circles</span>
+            </td>
+          </tr>
+          
+          <!-- Player 6 -->
+          <tr>
+            <td class="player-rank">6</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/567890" alt="WaveRider" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">WaveRider</span>
+              </div>
+            </td>
+            <td>42</td>
+            <td>1250</td>
+            <td>55</td>
+            <td>
+              <span class="player-difficulty hard">Supersonic</span>
+            </td>
+          </tr>
+          
+          <!-- Player 7 -->
+          <tr>
+            <td class="player-rank">7</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/234567" alt="ShipGod" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">ShipGod</span>
+              </div>
+            </td>
+            <td>38</td>
+            <td>1100</td>
+            <td>50</td>
+            <td>
+              <span class="player-difficulty hard">Windy Landscape</span>
+            </td>
+          </tr>
+          
+          <!-- Player 8 -->
+          <tr>
+            <td class="player-rank">8</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/890123" alt="Newbie" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">Newbie</span>
+              </div>
+            </td>
+            <td>30</td>
+            <td>950</td>
+            <td>40</td>
+            <td>
+              <span class="player-difficulty easy">Clubstep</span>
+            </td>
+          </tr>
+          
+          <!-- Player 9 -->
+          <tr>
+            <td class="player-rank">9</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/456789" alt="BallExpert" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">BallExpert</span>
+              </div>
+            </td>
+            <td>25</td>
+            <td>800</td>
+            <td>35</td>
+            <td>
+              <span class="player-difficulty medium">Deadlocked</span>
+            </td>
+          </tr>
+          
+          <!-- Player 10 -->
+          <tr>
+            <td class="player-rank">10</td>
+            <td>
+              <div class="player-info">
+                <div class="player-icon">
+                  <img src="https://gdbrowser.com/icon/123789" alt="SpiderPro" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+                </div>
+                <span class="player-name">SpiderPro</span>
+              </div>
+            </td>
+            <td>20</td>
+            <td>700</td>
+            <td>30</td>
+            <td>
+              <span class="player-difficulty easy">ToE 2</span>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="pagination" id="pagination">
-      <button onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
+    <div class="pagination">
+      <button><i class="fas fa-chevron-left"></i></button>
       <button class="active">1</button>
       <button>2</button>
       <button>3</button>
       <button>4</button>
       <button>5</button>
-      <button onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
+      <button><i class="fas fa-chevron-right"></i></button>
     </div>
   </main>
 
@@ -474,138 +638,10 @@
   </footer>
 
   <script>
-    // Sample player data (in a real app, this would come from an API)
-    const playerData = [
-      {
-        rank: 1,
-        name: "Player1",
-        playerID: 123456,
-        demons: 78,
-        points: 2450,
-        cp: 120,
-        lastRecord: "Bloodbath",
-        difficulty: "extreme"
-      },
-      {
-        rank: 2,
-        name: "GDPro",
-        playerID: 654321,
-        demons: 65,
-        points: 2100,
-        cp: 95,
-        lastRecord: "Sakupen Circles",
-        difficulty: "extreme"
-      },
-      {
-        rank: 3,
-        name: "DemonSlayer",
-        playerID: 789012,
-        demons: 58,
-        points: 1875,
-        cp: 80,
-        lastRecord: "Acu",
-        difficulty: "extreme"
-      },
-      {
-        rank: 4,
-        name: "JumpKing",
-        playerID: 345678,
-        demons: 52,
-        points: 1650,
-        cp: 75,
-        lastRecord: "Artificial Ascent",
-        difficulty: "insane"
-      },
-      {
-        rank: 5,
-        name: "CubeMaster",
-        playerID: 901234,
-        demons: 48,
-        points: 1420,
-        cp: 65,
-        lastRecord: "Nine Circles",
-        difficulty: "hard"
-      },
-      {
-        rank: 6,
-        name: "WaveRider",
-        playerID: 567890,
-        demons: 42,
-        points: 1250,
-        cp: 55,
-        lastRecord: "Supersonic",
-        difficulty: "hard"
-      },
-      {
-        rank: 7,
-        name: "ShipGod",
-        playerID: 234567,
-        demons: 38,
-        points: 1100,
-        cp: 50,
-        lastRecord: "Windy Landscape",
-        difficulty: "hard"
-      },
-      {
-        rank: 8,
-        name: "Newbie",
-        playerID: 890123,
-        demons: 30,
-        points: 950,
-        cp: 40,
-        lastRecord: "Clubstep",
-        difficulty: "easy"
-      },
-      {
-        rank: 9,
-        name: "BallExpert",
-        playerID: 456789,
-        demons: 25,
-        points: 800,
-        cp: 35,
-        lastRecord: "Deadlocked",
-        difficulty: "medium"
-      },
-      {
-        rank: 10,
-        name: "SpiderPro",
-        playerID: 123789,
-        demons: 20,
-        points: 700,
-        cp: 30,
-        lastRecord: "ToE 2",
-        difficulty: "easy"
-      }
-    ];
-
-    // Function to load player icons from GD API
-    async function loadPlayerIcons() {
-      const leaderboardBody = document.getElementById('leaderboardBody');
-      
-      // Hide loading indicator
-      document.getElementById('loadingIndicator').style.display = 'none';
-      document.getElementById('leaderboardTable').style.display = 'table';
-      
-      // Clear existing content
-      leaderboardBody.innerHTML = '';
-      
-      // Add players to the table
-      playerData.forEach(player => {
-        const row = document.createElement('tr');
-        
-        // Get player icon URL (using Geometry Dash API)
-        const iconUrl = `https://gdbrowser.com/icon/${player.playerID}`;
-        
-        row.innerHTML = `
-          <td class="player-rank">${player.rank}</td>
-          <td>
-            <div class="player-info">
-              <div class="player-icon">
-                <img src="${iconUrl}" alt="${player.name}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'icon-placeholder\\'><i class=\\'fas fa-user\\'></i></div>';">
-              </div>
-              <span class="player-name">${player.name}</span>
-            </div>
-          </td>
-          <td>${player.demons}</td>
-          <td>${player.points}</td>
-          <td>
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      document.getElementById('mainNav').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
