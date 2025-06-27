@@ -497,7 +497,7 @@
       <h1>FrGDPS Demonlist</h1>
       <nav id="mainNav">
         <a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a>
-        <a href="https://forms.gle/DNvnJwDPtNNpsfUd8"><i class="fas fa-plus-circle"></i> Submit Level</a>
+        <a href="#"><i class="fas fa-plus-circle"></i> Submit Level</a>
         <a href="info.html"><i class="fas fa-info-circle"></i> About</a>
         <a href="best.html"><i class="fas fa-trophy"></i> Leaderboard</a>
       </nav>
@@ -553,49 +553,6 @@
         </table>
       </div>
     </section>
-
-    <section id="submitPage" class="hidden">
-      <div class="form-container">
-        <h2><i class="fas fa-plus-circle"></i> Submit New Demon</h2>
-        <form id="submitForm">
-          <div class="form-group">
-            <label for="levelName">Level Name</label>
-            <input type="text" id="levelName" required placeholder="Enter level name">
-          </div>
-          
-          <div class="form-group">
-            <label for="levelCreator">Creator</label>
-            <input type="text" id="levelCreator" required placeholder="Enter creator name">
-          </div>
-          
-          <div class="form-group">
-            <label for="levelVerifier">Verifier</label>
-            <input type="text" id="levelVerifier" required placeholder="Enter verifier name">
-          </div>
-          
-          <div class="form-group">
-            <label for="levelDifficulty">Difficulty</label>
-            <select id="levelDifficulty" required>
-              <option value="">Select difficulty</option>
-              <option value="easy">Easy Demon</option>
-              <option value="medium">Medium Demon</option>
-              <option value="hard">Hard Demon</option>
-              <option value="insane">Insane Demon</option>
-              <option value="extreme">Extreme Demon</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="levelVideo">Video URL</label>
-            <input type="url" id="levelVideo" required placeholder="Enter YouTube or video link">
-          </div>
-          
-          <button type="submit" class="btn btn-block">
-            <i class="fas fa-paper-plane"></i> Submit Level
-          </button>
-        </form>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -605,200 +562,69 @@
     </div>
   </footer>
 
-  <div id="toast" class="toast">
-    <i class="fas fa-check-circle"></i>
-    <span class="toast-message">Success message here</span>
-  </div>
+  <!-- Include PapaParse for CSV parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script>
+    const CSV_URL = 'https://docs.google.com/spreadsheets/d/1DBQQuP9cREiLX-RqYjRYWcQymS7mpRQ6HwWrPjwmdLg/export?format=csv&gid=0';
 
-  <script type="module">
-    // Firebase Configuration
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { 
-      getDatabase, 
-      ref, 
-      onValue, 
-      push, 
-      set,
-      orderByChild,
-      query,
-      limitToLast
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDs2sGkNFJJqPOnx1fmeFQcGHXH1yFmPVc",
-      authDomain: "frgdpsdemon.firebaseapp.com",
-      databaseURL: "https://frgdpsdemon-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "frgdpsdemon",
-      storageBucket: "frgdpsdemon.firebasestorage.app",
-      messagingSenderId: "459095738556",
-      appId: "1:459095738556:web:2b73dfa2694b977655e8b9",
-      measurementId: "G-QMQ5G3FQ90"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    // DOM Elements
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
     const demonTableBody = document.getElementById('demonTableBody');
-    const submitForm = document.getElementById('submitForm');
-    const toast = document.getElementById('toast');
-    const toastMessage = document.querySelector('.toast-message');
-    const listPage = document.getElementById('listPage');
-    const submitPage = document.getElementById('submitPage');
     const searchInput = document.getElementById('searchInput');
     const totalDemonsEl = document.getElementById('totalDemons');
     const extremeDemonsEl = document.getElementById('extremeDemons');
     const lastUpdatedEl = document.getElementById('lastUpdated');
 
-    // Mobile Menu Toggle
-    mobileMenuBtn.addEventListener('click', () => {
-      mainNav.classList.toggle('active');
-    });
-
-    // Show Toast Notification
-    function showToast(message, type = 'success') {
-      const icon = type === 'success' ? 'fa-check-circle' : 
-                  type === 'error' ? 'fa-times-circle' : 'fa-exclamation-circle';
-      
-      toast.innerHTML = `<i class="fas ${icon}"></i><span class="toast-message">${message}</span>`;
-      toast.className = `toast ${type} show`;
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
+    function formatDate(date) {
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     }
 
-    // Format date
-    function formatDate(timestamp) {
-      const date = new Date(timestamp);
-      return date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
+    function renderTable(data) {
+      demonTableBody.innerHTML = '';
+      let index = 1;
+      let extremeCount = 0;
 
-    // Load Demon List
-    function loadDemonList() {
-      const demonsRef = query(ref(db, 'demons'), orderByChild('timestamp'), limitToLast(50));
-      
-      onValue(demonsRef, (snapshot) => {
-        const data = snapshot.val();
-        demonTableBody.innerHTML = '';
-        
-        if (data) {
-          let index = 1;
-          let extremeCount = 0;
-          const demons = Object.entries(data).reverse();
-          
-          demons.forEach(([key, demon]) => {
-            if (demon.difficulty === 'extreme') extremeCount++;
-            
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td><span class="rank-badge">${index}</span></td>
-              <td>${demon.name}</td>
-              <td><span class="difficulty ${demon.difficulty || 'hard'}">${demon.difficulty || 'Hard'}</span></td>
-              <td>${demon.creator}</td>
-              <td>${demon.verifier}</td>
-              <td><a href="${demon.video}" target="_blank" class="video-btn"><i class="fas fa-video"></i> Watch</a></td>
-            `;
-            demonTableBody.appendChild(tr);
-            index++;
-          });
-          
-          // Update stats
-          totalDemonsEl.textContent = demons.length;
-          extremeDemonsEl.textContent = extremeCount;
-          lastUpdatedEl.textContent = formatDate(Date.now());
-          
-          // Add search functionality
-          searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = demonTableBody.querySelectorAll('tr');
-            
-            rows.forEach(row => {
-              const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-              const creator = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-              const verifier = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
-              
-              if (name.includes(searchTerm) || creator.includes(searchTerm) || verifier.includes(searchTerm)) {
-                row.style.display = '';
-              } else {
-                row.style.display = 'none';
-              }
-            });
-          });
-        } else {
-          demonTableBody.innerHTML = `
-            <tr>
-              <td colspan="6" class="text-center">No demons submitted yet. Be the first!</td>
-            </tr>
-          `;
-        }
-      });
-    }
+      data.forEach(row => {
+        const difficulty = row.Difficulty.toLowerCase();
+        if (difficulty === 'extreme') extremeCount++;
 
-    // Handle Form Submission
-    submitForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('levelName').value;
-      const creator = document.getElementById('levelCreator').value;
-      const verifier = document.getElementById('levelVerifier').value;
-      const difficulty = document.getElementById('levelDifficulty').value;
-      const video = document.getElementById('levelVideo').value;
-      
-      // Basic validation
-      if (!name || !creator || !verifier || !difficulty || !video) {
-        showToast('Please fill all fields', 'error');
-        return;
-      }
-      
-      const newDemonRef = push(ref(db, 'demons'));
-      set(newDemonRef, {
-        name,
-        creator,
-        verifier,
-        difficulty,
-        video,
-        timestamp: Date.now()
-      }).then(() => {
-        showToast('Demon submitted successfully!');
-        submitForm.reset();
-      }).catch((error) => {
-        showToast(`Error: ${error.message}`, 'error');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="rank-badge">${index}</span></td>
+          <td>${row['Level Name']}</td>
+          <td><span class="difficulty ${difficulty}">${row.Difficulty}</span></td>
+          <td>${row.Creator}</td>
+          <td>${row.Verifier}</td>
+          <td><a href="${row.Video}" target="_blank" class="video-btn"><i class="fas fa-video"></i> Watch</a></td>
+        `;
+        demonTableBody.appendChild(tr);
+        index++;
       });
-    });
 
-    // Router for pages
-    function handleRouting() {
-      const path = window.location.pathname.split('/').pop();
-      
-      if (path === 'submit.html') {
-        listPage.classList.add('hidden');
-        submitPage.classList.remove('hidden');
-        document.title = 'Submit Demon - FrGDPS';
-        
-        // Update active nav link
-        document.querySelectorAll('nav a').forEach(link => {
-          link.classList.remove('active');
-          if (link.querySelector('.fa-plus-circle')) {
-            link.classList.add('active');
-          }
+      totalDemonsEl.textContent = data.length;
+      extremeDemonsEl.textContent = extremeCount;
+      lastUpdatedEl.textContent = formatDate(new Date());
+
+      // search filter
+      searchInput.addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        demonTableBody.querySelectorAll('tr').forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(term) ? '' : 'none';
         });
-      } else {
-        loadDemonList();
-      }
+      });
     }
 
-    // Initialize
-    handleRouting();
+    // Fetch and parse CSV
+    Papa.parse(CSV_URL, {
+      download: true,
+      header: true,
+      complete: results => {
+        renderTable(results.data.filter(r => r['Level Name']));
+      },
+      error: err => {
+        demonTableBody.innerHTML = '<tr><td colspan="6" class="text-center">Error loading data</td></tr>';
+        console.error(err);
+      }
+    });
   </script>
 </body>
 </html>
