@@ -1,391 +1,389 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard - FrGDPS Demonlist</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #ff4754;
-      --primary-dark: #e63e4a;
-      --secondary: #ff7b84;
-      --accent: #ffb74d;
-      --bg: #0f0f12;
-      --surface: #1a1a1f;
-      --surface-light: #24242b;
-      --text: #f0f0f0;
-      --text-muted: #b0b0b0;
-      --glow: rgba(255, 71, 84, 0.3);
-      --radius: 16px;
-      --radius-sm: 8px;
-      --shadow: 0 8px 24px rgba(0,0,0,0.4);
-      --success: #4caf50;
-      --warning: #ff9800;
-      --error: #f44336;
-      --easy: #4caf50;
-      --medium: #ff9800;
-      --hard: #f44336;
-      --insane: #9c27b0;
-      --extreme: #2196f3;
-      --gd-yellow: #ffcc00;
-      --gd-blue: #00a2ff;
-      --gd-green: #00cc33;
-      --gd-purple: #cc33ff;
-    }
+  <style>  
+    :root {  
+      --primary: #ff4754;  
+      --primary-dark: #e63e4a;  
+      --secondary: #ff7b84;  
+      --accent: #ffb74d;  
+      --bg: #0f0f12;  
+      --surface: #1a1a1f;  
+      --surface-light: #24242b;  
+      --text: #f0f0f0;  
+      --text-muted: #b0b0b0;  
+      --glow: rgba(255, 71, 84, 0.3);  
+      --radius: 16px;  
+      --radius-sm: 8px;  
+      --shadow: 0 8px 24px rgba(0,0,0,0.4);  
+      --success: #4caf50;  
+      --warning: #ff9800;  
+      --error: #f44336;  
+      --easy: #4caf50;  
+      --medium: #ff9800;  
+      --hard: #f44336;  
+      --insane: #9c27b0;  
+      --extreme: #2196f3;  
+      --gd-yellow: #ffcc00;  
+      --gd-blue: #00a2ff;  
+      --gd-green: #00cc33;  
+      --gd-purple: #cc33ff;  
+    }  * {  
+  margin: 0;  
+  padding: 0;  
+  box-sizing: border-box;  
+  transition: all 0.2s ease;  
+}  
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: all 0.2s ease;
-    }
+body {  
+  font-family: 'Rubik', system-ui, sans-serif;  
+  background: var(--bg);  
+  color: var(--text);  
+  min-height: 100vh;  
+  display: flex;  
+  flex-direction: column;  
+  line-height: 1.6;  
+}  
 
-    body {
-      font-family: 'Rubik', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-    }
+/* Header Styles */  
+header {  
+  background: var(--surface);  
+  color: #fff;  
+  padding: 1.5rem 1rem;  
+  text-align: center;  
+  position: sticky;  
+  top: 0;  
+  z-index: 100;  
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);  
+}  
 
-    /* Header Styles */
-    header {
-      background: var(--surface);
-      color: #fff;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
+.header-container {  
+  max-width: 1200px;  
+  margin: 0 auto;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+}  
 
-    .header-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+header h1 {  
+  font-size: clamp(1.8rem, 5vw, 2.5rem);  
+  background: linear-gradient(45deg, var(--primary), var(--accent));  
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+  margin-bottom: 0.5rem;  
+  font-weight: 700;  
+  letter-spacing: -0.5px;  
+}  
 
-    header h1 {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      background: linear-gradient(45deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
+/* Navigation */  
+nav {  
+  display: flex;  
+  justify-content: center;  
+  gap: 1.5rem;  
+  margin-top: 1rem;  
+}  
 
-    /* Navigation */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
+nav a {  
+  color: var(--text-muted);  
+  text-decoration: none;  
+  font-weight: 500;  
+  padding: 0.5rem 1rem;  
+  border-radius: var(--radius-sm);  
+  font-size: 0.95rem;  
+  transition: all 0.3s ease;  
+  display: flex;  
+  align-items: center;  
+}  
 
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-    }
+nav a:hover, nav a.active {  
+  color: var(--text);  
+  background: var(--surface-light);  
+}  
 
-    nav a:hover, nav a.active {
-      color: var(--text);
-      background: var(--surface-light);
-    }
+nav a.active {  
+  color: var(--primary);  
+}  
 
-    nav a.active {
-      color: var(--primary);
-    }
+nav a i {  
+  margin-right: 0.5rem;  
+  font-size: 0.9rem;  
+}  
 
-    nav a i {
-      margin-right: 0.5rem;
-      font-size: 0.9rem;
-    }
+/* Main Content */  
+main {  
+  flex: 1;  
+  padding: 2rem 1rem;  
+  max-width: 1200px;  
+  margin: 0 auto;  
+  width: 100%;  
+}  
 
-    /* Main Content */
-    main {
-      flex: 1;
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
+/* Leaderboard Styles */  
+.leaderboard-container {  
+  background: var(--surface);  
+  border-radius: var(--radius);  
+  box-shadow: var(--shadow);  
+  overflow: hidden;  
+  border: 1px solid rgba(255,255,255,0.05);  
+}  
 
-    /* Leaderboard Styles */
-    .leaderboard-container {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
+.leaderboard-header {  
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));  
+  padding: 1.5rem;  
+  display: flex;  
+  align-items: center;  
+  justify-content: space-between;  
+}  
 
-    .leaderboard-header {
-      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.leaderboard-header h2 {  
+  font-size: 1.5rem;  
+  font-weight: 700;  
+  display: flex;  
+  align-items: center;  
+  gap: 0.8rem;  
+}  
 
-    .leaderboard-header h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
+.leaderboard-header h2 i {  
+  font-size: 1.2rem;  
+}  
 
-    .leaderboard-header h2 i {
-      font-size: 1.2rem;
-    }
+.leaderboard-controls {  
+  display: flex;  
+  gap: 0.8rem;  
+}  
 
-    .leaderboard-controls {
-      display: flex;
-      gap: 0.8rem;
-    }
+.leaderboard-controls button {  
+  background: rgba(0,0,0,0.2);  
+  border: none;  
+  color: white;  
+  padding: 0.5rem 1rem;  
+  border-radius: var(--radius-sm);  
+  cursor: pointer;  
+  display: flex;  
+  align-items: center;  
+  gap: 0.5rem;  
+  font-weight: 500;  
+  font-size: 0.9rem;  
+}  
 
-    .leaderboard-controls button {
-      background: rgba(0,0,0,0.2);
-      border: none;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
+.leaderboard-controls button:hover {  
+  background: rgba(0,0,0,0.3);  
+}  
 
-    .leaderboard-controls button:hover {
-      background: rgba(0,0,0,0.3);
-    }
+.leaderboard-table {  
+  width: 100%;  
+  border-collapse: collapse;  
+}  
 
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.leaderboard-table th {  
+  background: var(--surface-light);  
+  padding: 1rem;  
+  text-align: left;  
+  font-weight: 600;  
+  color: var(--text-muted);  
+  font-size: 0.9rem;  
+  text-transform: uppercase;  
+  letter-spacing: 0.5px;  
+}  
 
-    .leaderboard-table th {
-      background: var(--surface-light);
-      padding: 1rem;
-      text-align: left;
-      font-weight: 600;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.leaderboard-table td {  
+  padding: 1rem;  
+  border-bottom: 1px solid rgba(255,255,255,0.05);  
+  vertical-align: middle;  
+}  
 
-    .leaderboard-table td {
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      vertical-align: middle;
-    }
+.leaderboard-table tr:last-child td {  
+  border-bottom: none;  
+}  
 
-    .leaderboard-table tr:last-child td {
-      border-bottom: none;
-    }
+.leaderboard-table tr:hover td {  
+  background: rgba(255,255,255,0.03);  
+}  
 
-    .leaderboard-table tr:hover td {
-      background: rgba(255,255,255,0.03);
-    }
+/* Player Entry Styles */  
+.player-rank {  
+  font-weight: 700;  
+  color: var(--gd-yellow);  
+  text-align: center;  
+  width: 60px;  
+}  
 
-    /* Player Entry Styles */
-    .player-rank {
-      font-weight: 700;
-      color: var(--gd-yellow);
-      text-align: center;
-      width: 60px;
-    }
+.player-info {  
+  display: flex;  
+  align-items: center;  
+  gap: 1rem;  
+}  
 
-    .player-info {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+.player-icon {  
+  width: 40px;  
+  height: 40px;  
+  border-radius: 50%;  
+  background: var(--gd-blue);  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  overflow: hidden;  
+  position: relative;  
+  border: 2px solid rgba(255,255,255,0.1);  
+}  
 
-    .player-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--gd-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-      border: 2px solid rgba(255,255,255,0.1);
-    }
+.player-icon img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+}  
 
-    .player-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.player-icon .icon-placeholder {  
+  font-size: 1.2rem;  
+  color: white;  
+}  
 
-    .player-icon .icon-placeholder {
-      font-size: 1.2rem;
-      color: white;
-    }
+.player-name {  
+  font-weight: 500;  
+}  
 
-    .player-name {
-      font-weight: 500;
-    }
+.player-stats {  
+  display: flex;  
+  gap: 1.5rem;  
+}  
 
-    .player-stats {
-      display: flex;
-      gap: 1.5rem;
-    }
+.stat-item {  
+  display: flex;  
+  flex-direction: column;  
+}  
 
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-    }
+.stat-label {  
+  font-size: 0.8rem;  
+  color: var(--text-muted);  
+}  
 
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+.stat-value {  
+  font-weight: 600;  
+}  
 
-    .stat-value {
-      font-weight: 600;
-    }
+.player-difficulty {  
+  display: inline-flex;  
+  align-items: center;  
+  padding: 0.4rem 1rem;  
+  border-radius: 50px;  
+  font-weight: 600;  
+  font-size: 0.8rem;  
+  text-transform: uppercase;  
+  letter-spacing: 0.5px;  
+}  
 
-    .player-difficulty {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+.easy { background: var(--easy); }  
+.medium { background: var(--medium); color: #333; }  
+.hard { background: var(--hard); }  
+.insane { background: var(--insane); }  
+.extreme { background: var(--extreme); }  
 
-    .easy { background: var(--easy); }
-    .medium { background: var(--medium); color: #333; }
-    .hard { background: var(--hard); }
-    .insane { background: var(--insane); }
-    .extreme { background: var(--extreme); }
+/* Footer */  
+footer {  
+  background: var(--surface);  
+  color: var(--text-muted);  
+  text-align: center;  
+  padding: 2rem 1rem;  
+  margin-top: auto;  
+  font-size: 0.9rem;  
+  border-top: 1px solid rgba(255,255,255,0.05);  
+}  
 
-    /* Footer */
-    footer {
-      background: var(--surface);
-      color: var(--text-muted);
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: auto;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
+.footer-container {  
+  max-width: 1200px;  
+  margin: 0 auto;  
+}  
 
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+/* Mobile Menu */  
+.mobile-menu-btn {  
+  display: none;  
+  background: none;  
+  border: none;  
+  color: var(--text);  
+  font-size: 1.5rem;  
+  cursor: pointer;  
+  position: absolute;  
+  left: 1rem;  
+  top: 1.5rem;  
+}  
 
-    /* Mobile Menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-      position: absolute;
-      left: 1rem;
-      top: 1.5rem;
-    }
+/* Responsive Styles */  
+@media (max-width: 768px) {  
+  nav {  
+    flex-direction: column;  
+    gap: 0.5rem;  
+    display: none;  
+    width: 100%;  
+    background: var(--surface-light);  
+    padding: 1rem;  
+    border-radius: var(--radius-sm);  
+    margin-top: 1rem;  
+  }  
 
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-        display: none;
-        width: 100%;
-        background: var(--surface-light);
-        padding: 1rem;
-        border-radius: var(--radius-sm);
-        margin-top: 1rem;
-      }
+  nav.active {  
+    display: flex;  
+  }  
 
-      nav.active {
-        display: flex;
-      }
+  .mobile-menu-btn {  
+    display: block;  
+  }  
 
-      .mobile-menu-btn {
-        display: block;
-      }
+  .leaderboard-header {  
+    flex-direction: column;  
+    gap: 1rem;  
+    align-items: flex-start;  
+  }  
 
-      .leaderboard-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-      }
+  .leaderboard-controls {  
+    width: 100%;  
+    justify-content: space-between;  
+  }  
 
-      .leaderboard-controls {
-        width: 100%;
-        justify-content: space-between;
-      }
+  .leaderboard-table {  
+    display: block;  
+    overflow-x: auto;  
+  }  
 
-      .leaderboard-table {
-        display: block;
-        overflow-x: auto;
-      }
+  .player-stats {  
+    flex-direction: column;  
+    gap: 0.5rem;  
+  }  
+}  
 
-      .player-stats {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-    }
+/* Pagination */  
+.pagination {  
+  display: flex;  
+  justify-content: center;  
+  gap: 0.5rem;  
+  margin-top: 2rem;  
+}  
 
-    /* Pagination */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
+.pagination button {  
+  background: var(--surface-light);  
+  border: none;  
+  color: var(--text);  
+  width: 40px;  
+  height: 40px;  
+  border-radius: 50%;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  cursor: pointer;  
+  font-weight: 600;  
+}  
 
-    .pagination button {
-      background: var(--surface-light);
-      border: none;
-      color: var(--text);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-weight: 600;
-    }
+.pagination button.active {  
+  background: var(--primary);  
+}  
 
-    .pagination button.active {
-      background: var(--primary);
-    }
+.pagination button:hover:not(.active) {  
+  background: var(--surface);  
+}
 
-    .pagination button:hover:not(.active) {
-      background: var(--surface);
-    }
   </style>
 </head>
 <body>
@@ -402,9 +400,7 @@
         <a href="best.html" class="active"><i class="fas fa-trophy"></i> Leaderboard</a>
       </nav>
     </div>
-  </header>
-
-  <main>
+  </header>  <main>
     <div class="leaderboard-container">
       <div class="leaderboard-header">
         <h2><i class="fas fa-trophy"></i> Top Players Leaderboard</h2>
@@ -412,236 +408,125 @@
           <button id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
           <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
         </div>
-      </div>
+      </div><table class="leaderboard-table" id="leaderboardTable">
+    <thead>
+      <tr>
+        <th style="width: 60px;">#</th>
+        <th>Player</th>
+        <th>Demons</th>
+        <th>Points</th>
+        <th>CP</th>
+        <th>Last Record</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <!-- Rows will be injected by JS -->
+    </tbody>
+  </table>
+</div>
 
-      <table class="leaderboard-table">
-        <thead>
-          <tr>
-            <th style="width: 60px;">#</th>
-            <th>Player</th>
-            <th>Demons</th>
-            <th>Points</th>
-            <th>CP</th>
-            <th>Last Record</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Player 1 -->
-          <tr>
-            <td class="player-rank">1</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/123456" alt="Player1" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">Player1</span>
-              </div>
-            </td>
-            <td>78</td>
-            <td>2450</td>
-            <td>120</td>
-            <td>
-              <span class="player-difficulty extreme">Bloodbath</span>
-            </td>
-          </tr>
-          
-          <!-- Player 2 -->
-          <tr>
-            <td class="player-rank">2</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/654321" alt="GDPro" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">GDPro</span>
-              </div>
-            </td>
-            <td>65</td>
-            <td>2100</td>
-            <td>95</td>
-            <td>
-              <span class="player-difficulty extreme">Sakupen Circles</span>
-            </td>
-          </tr>
-          
-          <!-- Player 3 -->
-          <tr>
-            <td class="player-rank">3</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/789012" alt="DemonSlayer" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">DemonSlayer</span>
-              </div>
-            </td>
-            <td>58</td>
-            <td>1875</td>
-            <td>80</td>
-            <td>
-              <span class="player-difficulty extreme">Acu</span>
-            </td>
-          </tr>
-          
-          <!-- Player 4 -->
-          <tr>
-            <td class="player-rank">4</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/345678" alt="JumpKing" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">JumpKing</span>
-              </div>
-            </td>
-            <td>52</td>
-            <td>1650</td>
-            <td>75</td>
-            <td>
-              <span class="player-difficulty insane">Artificial Ascent</span>
-            </td>
-          </tr>
-          
-          <!-- Player 5 -->
-          <tr>
-            <td class="player-rank">5</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/901234" alt="CubeMaster" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">CubeMaster</span>
-              </div>
-            </td>
-            <td>48</td>
-            <td>1420</td>
-            <td>65</td>
-            <td>
-              <span class="player-difficulty hard">Nine Circles</span>
-            </td>
-          </tr>
-          
-          <!-- Player 6 -->
-          <tr>
-            <td class="player-rank">6</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/567890" alt="WaveRider" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">WaveRider</span>
-              </div>
-            </td>
-            <td>42</td>
-            <td>1250</td>
-            <td>55</td>
-            <td>
-              <span class="player-difficulty hard">Supersonic</span>
-            </td>
-          </tr>
-          
-          <!-- Player 7 -->
-          <tr>
-            <td class="player-rank">7</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/234567" alt="ShipGod" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">ShipGod</span>
-              </div>
-            </td>
-            <td>38</td>
-            <td>1100</td>
-            <td>50</td>
-            <td>
-              <span class="player-difficulty hard">Windy Landscape</span>
-            </td>
-          </tr>
-          
-          <!-- Player 8 -->
-          <tr>
-            <td class="player-rank">8</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/890123" alt="Newbie" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">Newbie</span>
-              </div>
-            </td>
-            <td>30</td>
-            <td>950</td>
-            <td>40</td>
-            <td>
-              <span class="player-difficulty easy">Clubstep</span>
-            </td>
-          </tr>
-          
-          <!-- Player 9 -->
-          <tr>
-            <td class="player-rank">9</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/456789" alt="BallExpert" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">BallExpert</span>
-              </div>
-            </td>
-            <td>25</td>
-            <td>800</td>
-            <td>35</td>
-            <td>
-              <span class="player-difficulty medium">Deadlocked</span>
-            </td>
-          </tr>
-          
-          <!-- Player 10 -->
-          <tr>
-            <td class="player-rank">10</td>
-            <td>
-              <div class="player-info">
-                <div class="player-icon">
-                  <img src="https://gdbrowser.com/icon/123789" alt="SpiderPro" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
-                </div>
-                <span class="player-name">SpiderPro</span>
-              </div>
-            </td>
-            <td>20</td>
-            <td>700</td>
-            <td>30</td>
-            <td>
-              <span class="player-difficulty easy">ToE 2</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="pagination" id="pagination"></div>
 
-    <div class="pagination">
-      <button><i class="fas fa-chevron-left"></i></button>
-      <button class="active">1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>5</button>
-      <button><i class="fas fa-chevron-right"></i></button>
-    </div>
-  </main>
-
-  <footer>
+  </main>  <footer>
     <div class="footer-container">
       <p>© 2025 FrGDPS Demon List | All Rights Reserved</p>
       <p class="mt-2">Not affiliated with Geometry Dash or RobTop Games</p>
     </div>
-  </footer>
+  </footer>  <script>
+    const data = [
+      { rank: 1, name: 'Player1', icon: 'https://gdbrowser.com/icon/123456', demons: 78, points: 2450, cp: 120, record: 'Bloodbath', diff: 'extreme' },
+      { rank: 2, name: 'GDPro', icon: 'https://gdbrowser.com/icon/654321', demons: 65, points: 2100, cp: 95, record: 'Sakupen Circles', diff: 'extreme' },
+      { rank: 3, name: 'DemonSlayer', icon: 'https://gdbrowser.com/icon/789012', demons: 58, points: 1875, cp: 80, record: 'Acu', diff: 'extreme' },
+      { rank: 4, name: 'JumpKing', icon: 'https://gdbrowser.com/icon/345678', demons: 52, points: 1650, cp: 75, record: 'Artificial Ascent', diff: 'insane' },
+      { rank: 5, name: 'CubeMaster', icon: 'https://gdbrowser.com/icon/901234', demons: 48, points: 1420, cp: 65, record: 'Nine Circles', diff: 'hard' },
+      { rank: 6, name: 'WaveRider', icon: 'https://gdbrowser.com/icon/567890', demons: 42, points: 1250, cp: 55, record: 'Supersonic', diff: 'hard' },
+      { rank: 7, name: 'ShipGod', icon: 'https://gdbrowser.com/icon/234567', demons: 38, points: 1100, cp: 50, record: 'Windy Landscape', diff: 'hard' },
+      { rank: 8, name: 'Newbie', icon: 'https://gdbrowser.com/icon/890123', demons: 30, points: 950, cp: 40, record: 'Clubstep', diff: 'easy' },
+      { rank: 9, name: 'BallExpert', icon: 'https://gdbrowser.com/icon/456789', demons: 25, points: 800, cp: 35, record: 'Deadlocked', diff: 'medium' },
+      { rank: 10, name: 'SpiderPro', icon: 'https://gdbrowser.com/icon/123789', demons: 20, points: 700, cp: 30, record: 'ToE 2', diff: 'easy' }
+    ];
+    let currentData = [...data];
+    const rowsPerPage = 2;
+    let currentPage = 1;
 
-  <script>
+    const tableBody = document.getElementById('tableBody');
+    const pagination = document.getElementById('pagination');
+
+    function renderTable() {
+      tableBody.innerHTML = '';
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      currentData.slice(start, end).forEach(player => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="player-rank">${player.rank}</td>
+          <td>
+            <div class="player-info">
+              <div class="player-icon">
+                <img src="${player.icon}" alt="${player.name}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'icon-placeholder\'><i class=\'fas fa-user\'></i></div>';">
+              </div>
+              <span class="player-name">${player.name}</span>
+            </div>
+          </td>
+          <td>${player.demons}</td>
+          <td>${player.points}</td>
+          <td>${player.cp}</td>
+          <td><span class="player-difficulty ${player.diff}">${player.record}</span></td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function renderPagination() {
+      pagination.innerHTML = '';
+      const pageCount = Math.ceil(currentData.length / rowsPerPage);
+      const prevBtn = document.createElement('button');
+      prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => { currentPage--; update(); });
+      pagination.appendChild(prevBtn);
+
+      for (let i = 1; i <= pageCount; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => { currentPage = i; update(); });
+        pagination.appendChild(btn);
+      }
+
+      const nextBtn = document.createElement('button');
+      nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      nextBtn.disabled = currentPage === pageCount;
+      nextBtn.addEventListener('click', () => { currentPage++; update(); });
+      pagination.appendChild(nextBtn);
+    }
+
+    function update() {
+      renderTable();
+      renderPagination();
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const term = prompt('Enter player name or difficulty to search:').toLowerCase();
+      if (term !== null) {
+        currentData = data.filter(p => p.name.toLowerCase().includes(term) || p.diff.toLowerCase().includes(term));
+        currentPage = 1;
+        update();
+      }
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      currentData = [...data];
+      currentPage = 1;
+      update();
+    });
+
     // Mobile menu toggle
     document.getElementById('mobileMenuBtn').addEventListener('click', function() {
       document.getElementById('mainNav').classList.toggle('active');
     });
-  </script>
-</body>
+
+    // Initial render
+    update();
+  </script></body>
 </html>
