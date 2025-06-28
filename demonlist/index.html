@@ -83,7 +83,8 @@
       display: flex;  
       justify-content: center;  
       gap: 1.5rem;  
-      margin-top: 1rem;  
+      margin-top: 1rem;
+      z-index: 99;
     }  
   
     nav a {  
@@ -367,17 +368,30 @@
     }  
   
     /* Responsive Styles */  
-    @media (max-width: 768px) {  
-      nav {  
-        flex-direction: column;  
-        gap: 0.5rem;  
-        display: none;  
-        width: 100%;  
-        background: var(--surface-light);  
-        padding: 1rem;  
-        border-radius: var(--radius-sm);  
-        margin-top: 1rem;  
-      }  
+    @media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    display: none;
+    width: 100%;
+    background: var(--surface-light);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 99;
+  }
+
+  .header-container {
+  position: relative; /* Tambahkan ini */
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}  
   
       nav.active {  
         display: flex;  
@@ -497,12 +511,10 @@
       </button>
       <h1>FrGDPS Demonlist</h1>
       <nav id="mainNav">
-        <ul>
           <li><a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a></li>
           <li><a href="https://forms.gle/DNvnJwDPtNNpsfUd8" target="_blank" rel="noopener noreferrer"><i class="fas fa-plus-circle"></i> Submit Level</a></li>
           <li><a href="info.html"><i class="fas fa-info-circle"></i> About</a></li>
           <li><a href="best.html"><i class="fas fa-trophy"></i> Leaderboard</a></li>
-        </ul>
       </nav>
     </div>
   </header>
@@ -764,6 +776,12 @@
     }
   });
 
+  // Toggle mobile menu
+document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('active');
+});
+
   // Close modal when pressing Escape key
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && modal.style.display === 'block') {
@@ -797,6 +815,30 @@
 
   loadData();
   setInterval(loadData, 300000);
-</script>
+<script>
+    // Toggle mobile menu
+document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('active');
+  
+  // Tambahkan animasi sederhana
+  if (nav.classList.contains('active')) {
+    nav.style.animation = 'fadeIn 0.3s forwards';
+  } else {
+    nav.style.animation = 'fadeOut 0.3s forwards';
+  }
+});
+
+// Tambahkan animasi di CSS
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+  </script>
 </body>
 </html>
