@@ -79,16 +79,22 @@
       letter-spacing: -0.5px;
     }
 
-    /* Navigation */
+    /* Navigation - Improved structure */
     nav {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 1.5rem;
       margin-top: 1rem;
       z-index: 99;
-      list-style: none;
     }
-
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
     nav li {
       list-style: none;
     }
@@ -100,23 +106,42 @@
       padding: 0.5rem 1rem;
       border-radius: var(--radius-sm);
       font-size: 0.95rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
       display: flex;
       align-items: center;
     }
-
     nav a:hover, nav a.active {
       color: var(--text);
       background: var(--surface-light);
     }
-
     nav a.active {
       color: var(--primary);
     }
-
     nav a i {
       margin-right: 0.5rem;
       font-size: 0.9rem;
+    }
+
+    /* Hamburger / Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 2rem;
+      cursor: pointer;
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      z-index: 200;
+      padding: 0.2em 0.5em;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .mobile-menu-btn:focus,
+    .mobile-menu-btn:hover {
+      background: var(--surface-light);
+      outline: none;
     }
 
     /* Main Content */
@@ -323,19 +348,6 @@
       margin: 0 auto;
     }
 
-    /* Mobile Menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-      position: absolute;
-      left: 1rem;
-      top: 1.5rem;
-    }
-
     /* Stats Cards */
     .stats-container {
       display: grid;
@@ -373,45 +385,60 @@
       color: var(--text-muted);
     }
 
-    /* Responsive Styles */
+    /* Responsive Styles - Improved for mobile nav */
     @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-        display: none;
-        width: 100%;
-        background: var(--surface-light);
-        padding: 1rem;
-        border-radius: var(--radius-sm);
-        margin-top: 1rem;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 99;
+      .header-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
       }
-
-      nav.active {
-        display: flex;
-        animation: fadeIn 0.3s forwards;
-      }
-
       .mobile-menu-btn {
         display: block;
       }
-
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100vw;
+        background: var(--surface-light);
+        border-radius: 0 0 var(--radius) var(--radius);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 0;
+        gap: 0;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.16);
+        display: none;
+        animation: fadeIn 0.3s forwards;
+      }
+      nav.active {
+        display: block;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 0;
+      }
+      nav li {
+        width: 100%;
+      }
+      nav a {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
       .form-container {
         padding: 1.5rem;
       }
-
       th, td {
         padding: 1rem;
       }
-
       .stats-container {
         grid-template-columns: 1fr;
       }
     }
 
+    /* ...other unchanged utility, modal, thumbnail, etc. styles... */
     /* Utility Classes */
     .text-center {
       text-align: center;
@@ -618,15 +645,17 @@
 <body>
   <header>
     <div class="header-container">
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile Menu">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
         <i class="fas fa-bars"></i>
       </button>
       <h1>FrGDPS Demonlist</h1>
-      <nav id="mainNav">
-        <li><a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a></li>
-        <li><a href="https://forms.gle/DNvnJwDPtNNpsfUd8" target="_blank" rel="noopener noreferrer"><i class="fas fa-plus-circle"></i> Submit Level</a></li>
-        <li><a href="info.html"><i class="fas fa-info-circle"></i> About</a></li>
-        <li><a href="best.html"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+      <nav id="mainNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="active"><i class="fas fa-list"></i> Demon List</a></li>
+          <li><a href="https://forms.gle/DNvnJwDPtNNpsfUd8" target="_blank" rel="noopener noreferrer"><i class="fas fa-plus-circle"></i> Submit Level</a></li>
+          <li><a href="info.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="best.html"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+        </ul>
       </nav>
     </div>
   </header>
@@ -694,6 +723,38 @@
     // Set year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Hamburger menu logic
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    const navLinks = mainNav.querySelectorAll('a');
+
+    function closeMenu() {
+      mainNav.classList.remove('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    mobileMenuBtn.addEventListener('click', function () {
+      const isOpen = mainNav.classList.toggle('active');
+      mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close menu when link clicked (on mobile)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          closeMenu();
+        }
+      });
+    });
+
+    // Optional: close menu when resizing up to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    // The rest of your script (CSV loading, modal, search, etc.) goes here, unchanged.
     const BASE_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSDN7HUdFLEi7P5CkSFXFz_b16Os_8hdEItayViA0TfNze8nudO6sxlJgL9h2K8gkYMQah6RS1KXvL2/pub?gid=1550981254&single=true&output=csv';
     const tableBody = document.getElementById('demonTableBody');
     const totalEl = document.getElementById('totalDemons');
@@ -785,13 +846,6 @@
         youtubeFrame.src = '';
         document.body.style.overflow = 'auto'; // Re-enable scrolling
       }
-    });
-
-    // Toggle mobile menu
-    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-      const nav = document.getElementById('mainNav');
-      nav.classList.toggle('active');
-      // Simple animation, auto handled by CSS via .active
     });
 
     // Close modal when pressing Escape key
