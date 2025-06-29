@@ -1,41 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard - FrGDPS Demonlist</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
+      --primary: #ff4754;
+      --primary-dark: #e63e4a;
+      --secondary: #ff7b84;
+      --accent: #ffb74d;
       --bg: #0f0f12;
       --surface: #1a1a1f;
       --surface-light: #24242b;
       --text: #f0f0f0;
       --text-muted: #b0b0b0;
-      --primary: #ff4754;
-      --accent: #ffb74d;
+      --glow: rgba(255, 71, 84, 0.3);
+      --radius: 16px;
       --radius-sm: 8px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.4);
+      --easy: #4caf50;
+      --medium: #ff9800;
+      --hard: #f44336;
+      --insane: #9c27b0;
+      --extreme: #2196f3;
+      --gd-yellow: #ffcc00;
+      --gd-blue: #00a2ff;
     }
-    * { margin:0; padding:0; box-sizing:border-box; transition: all .2s ease; }
+    * { margin:0; padding:0; box-sizing:border-box; transition: all 0.2s ease; }
     body { font-family: 'Rubik', sans-serif; background: var(--bg); color: var(--text); min-height:100vh; display:flex; flex-direction:column; }
-    header { background: var(--surface); padding:1rem; position:sticky; top:0; z-index:10; display:flex; align-items:center; }
-    .header-container { max-width:1200px; margin:0 auto; width:100%; display:flex; align-items:center; justify-content:space-between; position:relative; }
-    .mobile-menu-btn { display:none; background:none; border:none; color:var(--text); font-size:1.5rem; cursor:pointer; }
-    .mobile-menu-btn i { transition: transform .3s ease; }
+    header { background: var(--surface); padding:1.5rem 1rem; position:sticky; top:0; z-index:100; box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+    .header-container { max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; position:relative; }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      position: absolute;
+      left: 1rem;
+      top: 1.5rem;
+    }
+    .mobile-menu-btn i { transition: transform 0.3s ease; }
     .mobile-menu-btn.open i { transform: rotate(90deg); }
-    nav { display:flex; gap:1rem; }
-    nav a { color:var(--text); text-decoration:none; padding:.5rem 1rem; border-radius:var(--radius-sm); }
-    nav a.active, nav a:hover { background: var(--surface-light); color: #fff; }
-    main { flex:1; padding:2rem 1rem; max-width:1200px; margin:0 auto; width:100%; }
-    table { width:100%; border-collapse:collapse; background: var(--surface); }
-    th, td { padding:1rem; border-bottom:1px solid rgba(255,255,255,0.1); text-align:left; }
-    th { background: var(--surface-light); text-transform:uppercase; font-size:.85rem; color:var(--text-muted); }
-    tr:hover td { background: rgba(255,255,255,0.05); }
-    @media(max-width:768px) {
-      .mobile-menu-btn { display:block; }
-      nav { position:absolute; top:100%; left:0; right:0; background:var(--surface); flex-direction:column; display:none; padding:1rem; }
-      nav.active { display:flex; }
+
+    @media (max-width: 768px) {
+      .header-container { flex-direction: row; align-items: center; justify-content: space-between; }
+      .mobile-menu-btn { display: block; position: relative; margin-left: auto; top: auto; right: auto; }
+      nav { display: none; flex-direction: column; gap: .5rem; width: 100%; background: var(--surface-light); padding: 1rem; border-radius: var(--radius-sm); margin-top: 1rem; }
+      nav.active { display: flex; }
+      .leaderboard-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .leaderboard-controls { width: 100%; justify-content: space-between; }
+      .leaderboard-table { display: block; overflow-x: auto; }
+      .player-stats { flex-direction: column; gap: .5rem; }
+    }
+
+    h1 {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      margin-bottom: .5rem;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    nav a:hover, nav a.active {
+      color: var(--text);
+      background: var(--surface-light);
+    }
+    nav a.active { color: var(--primary); }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .leaderboard-container {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .leaderboard-header {
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .leaderboard-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .leaderboard-controls button {
+      background: rgba(0,0,0,0.2);
+      border: none;
+      color: white;
+      padding: .5rem 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .leaderboard-controls button:hover {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .leaderboard-table th {
+      background: var(--surface-light);
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: .9rem;
+    }
+    .leaderboard-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .leaderboard-table tr:last-child td { border-bottom: none; }
+    .leaderboard-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    /* footer */
+    footer {
+      background: var(--surface);
+      color: var(--text-muted);
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: auto;
+      font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
   </style>
 </head>
@@ -43,7 +168,7 @@
   <header>
     <div class="header-container">
       <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
-      <h1 style="background:linear-gradient(45deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">FrGDPS Demonlist</h1>
+      <h1>FrGDPS Demonlist</h1>
       <nav id="mainNav">
         <a href="index.html"><i class="fas fa-list"></i> Demon List</a>
         <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
@@ -54,25 +179,39 @@
   </header>
 
   <main>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Player</th>
-          <th>Points</th>
-          <th>Demons</th>
-          <th>CP</th>
-          <th>Last Record</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr><td colspan="6">Loading...</td></tr>
-      </tbody>
-    </table>
+    <div class="leaderboard-container">
+      <div class="leaderboard-header">
+        <h2><i class="fas fa-trophy"></i> Top Players Leaderboard</h2>
+        <div class="leaderboard-controls">
+          <button id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+          <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+        </div>
+      </div>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Demons</th>
+            <th>CP</th>
+            <th>Last Record</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="6">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
   </main>
 
+  <footer>
+    <p>© 2025 FrGDPS Demon List | All Rights Reserved</p>
+    <p>Not affiliated with Geometry Dash or RobTop Games</p>
+  </footer>
+
   <script>
-    // Toggle mobile menu & animate icon
+    // Hamburger toggle with rotation
     const btn = document.getElementById('mobileMenuBtn');
     const nav = document.getElementById('mainNav');
     btn.addEventListener('click', () => {
@@ -80,18 +219,17 @@
       btn.classList.toggle('open');
     });
 
-    // Load CSV data
+    // CSV parsing
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4lg62rVOAXsMSWM38OXt5bWUJjWpJSoqmO7AgkYO3ABorCaKGYmC3R6pHqBGgzQ49KNQngzvUl3Aa/pub?output=csv';
     const tableBody = document.getElementById('tableBody');
 
     fetch(csvUrl)
       .then(r => r.text())
       .then(txt => {
-        const [header, ...lines] = txt.trim().split('\n');
-        const rows = lines.map(l => l.split(','));
+        const [, ...lines] = txt.trim().split('\n');
         tableBody.innerHTML = '';
-        rows.forEach(cols => {
-          const [rank, player, points, demons, cp, record] = cols;
+        lines.forEach(line => {
+          const [rank, player, points, demons, cp, record] = line.split(',');
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${rank}</td>
