@@ -166,16 +166,16 @@
 </head>
 <body>
   <header>
-    <div class="header-container">
-      <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
-      <h1>FrGDPS Demonlist</h1>
-      <nav id="mainNav">
-        <a href="index.html"><i class="fas fa-list"></i> Demon List</a>
-        <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
-        <a href="info.html"><i class="fas fa-info-circle"></i> About</a>
-        <a href="best.html" class="active"><i class="fas fa-trophy"></i> Leaderboard</a>
-      </nav>
-    </div>
+  <div class="header-container">
+    <!-- Hapus tombol hamburger -->
+    <img src="demon.png" alt="FrDL Logo" style="max-height: 50px; margin-bottom: .5rem;" />
+    <nav id="mainNav">
+      <a href="index.html"><i class="fas fa-list"></i> Demon List</a>
+      <a href="submit.html"><i class="fas fa-plus-circle"></i> Submit Level</a>
+      <a href="info.html"><i class="fas fa-info-circle"></i> About</a>
+      <a href="best.html" class="active"><i class="fas fa-trophy"></i> Leaderboard</a>
+    </nav>
+  </div>
   </header>
 
   <main>
@@ -211,14 +211,6 @@
   </footer>
 
   <script>
-    // Hamburger toggle with rotation
-    const btn = document.getElementById('mobileMenuBtn');
-    const nav = document.getElementById('mainNav');
-    btn.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      btn.classList.toggle('open');
-    });
-
     // CSV parsing
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4lg62rVOAXsMSWM38OXt5bWUJjWpJSoqmO7AgkYO3ABorCaKGYmC3R6pHqBGgzQ49KNQngzvUl3Aa/pub?output=csv';
     const tableBody = document.getElementById('tableBody');
