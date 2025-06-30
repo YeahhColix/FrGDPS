@@ -65,17 +65,11 @@
       gap: 1rem;
       cursor: pointer;
       user-select: none;
-      animation: pulseLogo 1.5s infinite alternate cubic-bezier(.7,0,.3,1);
-    }
-    @keyframes pulseLogo {
-      0% { filter: drop-shadow(0 0 0px var(--primary)); }
-      100% { filter: drop-shadow(0 0 10px var(--primary)); }
     }
     .header-logo img {
       max-height: 50px;
       margin-bottom: 0;
       border-radius: 50%;
-      box-shadow: 0 2px 20px var(--glow);
       background: var(--surface-light);
       transition: transform 0.3s cubic-bezier(.7,0,.3,1);
     }
@@ -89,7 +83,6 @@
       text-fill-color: transparent;
       letter-spacing: 1px;
       transition: text-shadow 0.3s;
-      text-shadow: 0 2px 10px var(--glow);
     }
 
     /* Hamburger */
@@ -269,22 +262,62 @@
     .leaderboard-table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 600px;
+      font-size: 1.05rem;
+      background: var(--surface);
     }
-    .leaderboard-table th {
+    .leaderboard-table thead th {
       background: var(--surface-light);
       padding: 1rem;
       text-align: left;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
       font-size: .9rem;
+      letter-spacing: 1px;
+      border-bottom: 2px solid var(--primary-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
     .leaderboard-table td {
-      padding: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+      font-weight: 500;
+      background: var(--surface);
     }
     .leaderboard-table tr:last-child td { border-bottom: none; }
     .leaderboard-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    /* Medal styles for top 3 */
+    .rank-medal {
+      font-size: 1.3em;
+      font-weight: bold;
+      vertical-align: middle;
+      display: inline-block;
+      width: 1.7em;
+      text-align: center;
+      line-height: 1.2em;
+    }
+    .rank-1 { color: #ffd700; text-shadow: 0 0 7px #ffd70055; }
+    .rank-2 { color: #c0c0c0; text-shadow: 0 0 7px #c0c0c055; }
+    .rank-3 { color: #cd7f32; text-shadow: 0 0 7px #cd7f3255; }
+
+    @media (max-width: 900px) {
+      .leaderboard-table { min-width: 480px; font-size: .97rem;}
+      .leaderboard-table th, .leaderboard-table td { padding: 0.6rem 0.5rem; }
+      .leaderboard-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .leaderboard-controls { width: 100%; justify-content: flex-start; flex-direction: column; gap: 0.5rem; }
+    }
+    @media (max-width: 600px) {
+      .leaderboard-table { min-width: unset; font-size: .92rem;}
+      .leaderboard-container { margin: 0 -0.5rem; border-radius: 0; }
+      .leaderboard-header { padding: 1.2rem 0.5rem; }
+      .leaderboard-table th, .leaderboard-table td { padding: 0.45rem 0.3rem; }
+      .header-logo img { max-height: 40px; }
+      .header-logo span { font-size: 1.13rem; }
+    }
 
     /* footer */
     footer {
@@ -330,6 +363,7 @@
           </div>
         </div>
       </div>
+      <div style="overflow-x:auto;">
       <table class="leaderboard-table">
         <thead>
           <tr>
@@ -345,6 +379,7 @@
           <tr><td colspan="6">Loading...</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </main>
 
@@ -380,16 +415,26 @@
     const searchInput = document.getElementById('searchInput');
     let allRows = [];
 
+    // Medal for top 3
+    function getMedal(rank) {
+      switch (rank) {
+        case "1": return `<span class="rank-medal rank-1" title="1st">&#x1F947;</span>`; // gold medal
+        case "2": return `<span class="rank-medal rank-2" title="2nd">&#x1F948;</span>`; // silver medal
+        case "3": return `<span class="rank-medal rank-3" title="3rd">&#x1F949;</span>`; // bronze medal
+        default: return rank;
+      }
+    }
+
     function renderRows(filteredRows) {
       tableBody.innerHTML = '';
       if (filteredRows.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="6">No players found.</td></tr>';
         return;
       }
-      filteredRows.forEach(([rank, player, points, demons, cp, record]) => {
+      filteredRows.forEach(([rank, player, points, demons, cp, record], idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${rank}</td>
+          <td>${getMedal(rank)}</td>
           <td>${player}</td>
           <td>${points}</td>
           <td>${demons}</td>
